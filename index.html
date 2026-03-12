@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elshod Ibodullayev - Junior .NET Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #080C12;
+            --surface: #0E1420;
+            --border: #1C2535;
+            --accent: #00E5FF;
+            --purple: #7C3AED;
+            --green: #22C55E;
+            --text: #E8EDF5;
+            --muted: #5B6B82;
+            --tag-bg: #111827;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Mono', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Effects */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .glow-orb.blue {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            top: -200px;
+            left: -200px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .glow-orb.purple {
+            width: 300px;
+            height: 300px;
+            background: var(--purple);
+            bottom: -150px;
+            right: -150px;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            padding: 8px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: var(--bg);
+            border-color: var(--accent);
+        }
+
+        .lang-btn:hover:not(.active) {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        header {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeUp 0.6s ease-out;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--purple), var(--accent));
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--green);
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .contact-link {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 14px;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+        }
+
+        .name-section {
+            margin-bottom: 20px;
+        }
+
+        .name {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .name .accent {
+            color: var(--accent);
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .github-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .github-stats span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Live Project Card */
+        .live-project {
+            background: var(--surface);
+            border: 2px solid var(--green);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            animation: fadeUp 0.65s ease-out;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+        }
+
+        .live-badge {
+            position: absolute;
+            top: -12px;
+            left: 30px;
+            background: var(--green);
+            color: var(--bg);
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .project-content h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .project-content p {
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .project-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 229, 255, 0.3);
+        }
+
+        .btn.secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .btn.secondary:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            padding: 4px 12px;
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 12px;
+            color: var(--muted);
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Two Column Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 295px;
+            gap: 30px;
+            animation: fadeUp 0.7s ease-out;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+        }
+
+        .card h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        /* About Section */
+        .about p {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        /* Projects Section */
+        .project-item {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-item:last-child {
+            border-bottom: none;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 8px;
+        }
+
+        .project-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .project-meta {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: right;
+        }
+
+        .project-desc {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        /* Contact Form */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'DM Mono', monospace;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .form-divider {
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .telegram-btn {
+            width: 100%;
+            background: var(--purple);
+            color: var(--text);
+        }
+
+        .telegram-btn:hover {
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+        }
+
+        .form-message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 16px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .form-message.success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--green);
+            color: var(--green);
+        }
+
+        .form-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+
+        /* Skills Section */
+        .skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .skill-category {
+            margin-bottom: 8px;
+        }
+
+        .skill-category strong {
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .learning-tag {
+            border-color: var(--purple) !important;
+            color: var(--purple) !important;
+            border-style: dashed !important;
+        }
+
+        /* Education Section */
+        .edu-item {
+            margin-bottom: 16px;
+        }
+
+        .edu-school {
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .edu-degree {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .edu-years {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .edu-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid var(--purple);
+            border-radius: 12px;
+            font-size: 12px;
+            color: var(--purple);
+        }
+
+        /* Languages Section */
+        .lang-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .lang-name {
+            font-size: 14px;
+        }
+
+        .lang-level {
+            display: flex;
+            gap: 4px;
+        }
+
+        .lang-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+
+        .lang-dot.filled {
+            background: var(--accent);
+        }
+
+        /* Floating Buttons */
+        .floating-buttons {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .float-btn {
+            padding: 12px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .float-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            box-shadow: 0 8px 20px rgba(0, 229, 255, 0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-top {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .contact-links {
+                flex-wrap: wrap;
+            }
+
+            .name {
+                font-size: 36px;
+            }
+
+            .github-stats {
+                flex-wrap: wrap;
+            }
+
+            .project-buttons {
+                flex-direction: column;
+            }
+
+            .floating-buttons {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="bg-grid"></div>
+    <div class="glow-orb blue"></div>
+    <div class="glow-orb purple"></div>
+
+    <!-- Language Switcher -->
+    <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="uz">UZ</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-top">
+                <div class="status-badge">
+                    <div class="status-dot"></div>
+                    <span data-i18n="available">Open to opportunities</span>
+                </div>
+                <div class="contact-links">
+                    <a href="tel:+998995043004" class="contact-link">📞 +998 99 504 30 04</a>
+                    <a href="mailto:elshodibadullayev28@gmail.com" class="contact-link">✉️ Email</a>
+                    <a href="https://github.com/ElshodDev" target="_blank" class="contact-link">⌥ GitHub</a>
+                    <a href="https://www.linkedin.com/in/elshod-ibodullayev-338940379/" target="_blank" class="contact-link">in LinkedIn</a>
+                    <a href="https://t.me/@Elshod_Developer" target="_blank" class="contact-link">✈️ Telegram</a>
+                </div>
+            </div>
+            <div class="name-section">
+                <h1 class="name">Ibodullayev <span class="accent">Elshod</span></h1>
+                <div class="role-badge" data-i18n="role">Junior .NET Developer (Backend & Full-Stack)</div>
+            </div>
+            <div class="github-stats" id="githubStats">
+                <span>⭐ <span id="stars">0</span> stars</span>
+                <span>📁 <span id="repos">0</span> repos</span>
+                <span>👥 <span id="followers">0</span> followers</span>
+                <span>🔀 <span id="forks">0</span> forks</span>
+            </div>
+        </header>
+
+        <!-- Live Project Card -->
+        <div class="live-project">
+            <div class="live-badge" data-i18n="live_badge">LIVE NOW</div>
+            <div class="project-content">
+                <h3>Mulkchi</h3>
+                <p>O'zbekiston uchun ko'chmas mulk platformasi — uy-joy sotish, ijara va agent tizimi. Built with ASP.NET Core 9 + Clean Architecture.</p>
+                <div class="project-buttons">
+                    <a href="https://github.com/ElshodDev/Mulkchi" target="_blank" class="btn">
+                        <span data-i18n="live_demo">🌐 Live Demo</span>
+                    </a>
+                    <a href="https://github.com/ElshodDev/Mulkchi" target="_blank" class="btn secondary">
+                        <span data-i18n="live_src">⌥ Source Code</span>
+                    </a>
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">ASP.NET Core</span>
+                    <span class="tech-tag">EF Core</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">JWT</span>
+                    <span class="tech-tag">Docker</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two Column Grid -->
+        <div class="main-grid">
+            <!-- Left Column -->
+            <div class="left-column">
+                <!-- About -->
+                <div class="card about">
+                    <h2 data-i18n="about_title">About</h2>
+                    <p data-i18n="about">Enthusiastic Junior .NET Developer with hands-on experience building web applications using C#, ASP.NET Core, and PostgreSQL. Passionate about clean architecture and REST API design. Currently expanding into frontend with Angular, TypeScript, and HTML — eager to grow into a full-stack engineer.</p>
+                </div>
+
+                <!-- Other Projects -->
+                <div class="card projects">
+                    <h2 data-i18n="projects">Other Projects</h2>
+                    
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-title">E-Commerce REST API</div>
+                            <div class="project-meta">2024<br>Personal Project<br>REST API</div>
+                        </div>
+                        <div class="project-desc">Full-featured RESTful API with JWT authentication, role-based authorization (Admin/Customer), and complete Swagger documentation. Containerized with Docker.</div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">ASP.NET Core</span>
+                            <span class="tech-tag">EF Core</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">JWT</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Swagger</span>
+                        </div>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-title">Task Management System</div>
+                            <div class="project-meta">2023<br>University<br>Web App</div>
+                        </div>
+                        <div class="project-desc">Multi-user task tracker built on Clean Architecture with EF Core repository abstraction and MS SQL Server.</div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">ASP.NET Core</span>
+                            <span class="tech-tag">Clean Architecture</span>
+                            <span class="tech-tag">EF Core</span>
+                            <span class="tech-tag">MS SQL</span>
+                            <span class="tech-tag">LINQ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="card contact" id="contact">
+                    <h2 data-i18n="contact">Get in Touch</h2>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label data-i18n="name_label">Name</label>
+                            <input type="text" name="name" placeholder="John Doe" data-ph="name_placeholder" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="email_label">Email</label>
+                            <input type="email" name="email" placeholder="john@company.com" data-ph="email_placeholder" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="subject_label">Subject</label>
+                            <input type="text" name="subject" placeholder="Job offer / Collaboration" data-ph="subject_placeholder" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="message_label">Message</label>
+                            <textarea name="message" placeholder="Hi Elshod..." data-ph="message_placeholder" required></textarea>
+                        </div>
+                        <button type="submit" class="btn form-submit" data-i18n="send">Send Message →</button>
+                        <div id="formMessage"></div>
+                        <div class="form-divider" data-i18n="or">or</div>
+                        <a href="https://t.me/YOUR_TELEGRAM" target="_blank" class="btn telegram-btn" data-i18n="tg_chat">Write on Telegram</a>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <!-- Skills -->
+                <div class="card skills">
+                    <h2 data-i18n="skills">Skills</h2>
+                    <div class="skills-list">
+                        <div class="skill-category">
+                            <strong>Languages:</strong>
+                            <div class="skill-items">
+                                <span class="tech-tag">C#</span>
+                                <span class="tech-tag">SQL</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <strong>Backend:</strong>
+                            <div class="skill-items">
+                                <span class="tech-tag">ASP.NET Core</span>
+                                <span class="tech-tag">Web API</span>
+                                <span class="tech-tag">EF Core</span>
+                                <span class="tech-tag">LINQ</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <strong>Databases:</strong>
+                            <div class="skill-items">
+                                <span class="tech-tag">PostgreSQL</span>
+                                <span class="tech-tag">MS SQL Server</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <strong>Tools & DevOps:</strong>
+                            <div class="skill-items">
+                                <span class="tech-tag">Git</span>
+                                <span class="tech-tag">Docker</span>
+                                <span class="tech-tag">Swagger</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <strong data-i18n="learning">Currently Learning:</strong>
+                            <div class="skill-items">
+                                <span class="tech-tag learning-tag">Angular</span>
+                                <span class="tech-tag learning-tag">TypeScript</span>
+                                <span class="tech-tag learning-tag">HTML/CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="card education">
+                    <h2 data-i18n="education">Education</h2>
+                    <div class="edu-item">
+                        <div class="edu-school" data-i18n="edu_school">National University of Uzbekistan</div>
+                        <div class="edu-degree" data-i18n="edu_deg">Bachelor of Science — Computer Science</div>
+                        <div class="edu-years">2022 – 2026</div>
+                        <div class="edu-badge" data-i18n="edu_badge">In Progress</div>
+                    </div>
+                </div>
+
+                <!-- Languages -->
+                <div class="card languages">
+                    <h2 data-i18n="languages">Languages</h2>
+                    <div class="lang-item">
+                        <span class="lang-name" data-i18n="uzbek">Uzbek</span>
+                        <div class="lang-level">
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
+                        </div>
+                    </div>
+                    <div class="lang-item">
+                        <span class="lang-name" data-i18n="english">English</span>
+                        <div class="lang-level">
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot"></span>
+                            <span class="lang-dot"></span>
+                            <span class="lang-dot"></span>
+                        </div>
+                    </div>
+                    <div class="lang-item">
+                        <span class="lang-name" data-i18n="russian">Russian</span>
+                        <div class="lang-level">
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot"></span>
+                            <span class="lang-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <a href="https://t.me/@Elshod_Developer" target="_blank" class="float-btn">✈️ Telegram</a>
+        <a href="#contact" class="float-btn" data-i18n="fcta">Hire Me →</a>
+    </div>
+
+    <script>
+        // Translations
+        const translations = {
+            en: {
+                available: "Open to opportunities",
+                role: "Junior .NET Developer (Backend & Full-Stack)",
+                about_title: "About",
+                about: "Enthusiastic Junior .NET Developer with hands-on experience building web applications using C#, ASP.NET Core, and PostgreSQL. Passionate about clean architecture and REST API design. Currently expanding into frontend with Angular, TypeScript, and HTML — eager to grow into a full-stack engineer.",
+                live_badge: "LIVE NOW",
+                live_demo: "🌐 Live Demo",
+                live_src: "⌥ Source Code",
+                projects: "Other Projects",
+                skills: "Skills",
+                learning: "Currently Learning:",
+                education: "Education",
+                edu_school: "National University of Uzbekistan",
+                edu_deg: "Bachelor of Science — Computer Science",
+                edu_badge: "In Progress",
+                languages: "Languages",
+                uzbek: "Uzbek",
+                english: "English",
+                russian: "Russian",
+                native: "Native",
+                contact: "Get in Touch",
+                name_label: "Name",
+                email_label: "Email",
+                subject_label: "Subject",
+                message_label: "Message",
+                name_placeholder: "John Doe",
+                email_placeholder: "john@company.com",
+                subject_placeholder: "Job offer / Collaboration",
+                message_placeholder: "Hi Elshod...",
+                send: "Send Message →",
+                success: "✅ Message sent! I'll get back to you soon.",
+                fcta: "Hire Me →",
+                tg_chat: "Write on Telegram",
+                or: "or"
+            },
+            uz: {
+                available: "Ish takliflariga ochiqman",
+                role: "Junior .NET Dasturchi · Backend & Full-Stack",
+                about_title: "Haqimda",
+                about: "C#, ASP.NET Core va PostgreSQL yordamida veb-ilovalar yaratish bo'yicha tajribaga ega istiqbolli Junior .NET dasturchisi. Toza arxitektura va REST API dizayniiga ishtiyoqmand. Hozirda Angular, TypeScript va HTML bilan frontendga kengaymoqdaman — to'liq stack muhandisiga aylanishga intilaman.",
+                live_badge: "JONLI",
+                live_demo: "🌐 Jonli Ko'rish",
+                live_src: "⌥ Manba Kod",
+                projects: "Boshqa Loyihalar",
+                skills: "Ko'nikmalar",
+                learning: "O'rganmoqdaman:",
+                education: "Ta'lim",
+                edu_school: "O'zbekiston Milliy Universiteti",
+                edu_deg: "Bakalavr — Kompyuter fanlari",
+                edu_badge: "O'qimoqda",
+                languages: "Tillar",
+                uzbek: "O'zbek",
+                english: "Ingliz",
+                russian: "Rus",
+                native: "Ona tili",
+                contact: "Bog'lanish",
+                name_label: "Ism",
+                email_label: "Email",
+                subject_label: "Mavzu",
+                message_label: "Xabar",
+                name_placeholder: "John Doe",
+                email_placeholder: "john@company.com",
+                subject_placeholder: "Ish taklifi / Hamkorlik",
+                message_placeholder: "Salom Elshod...",
+                send: "Xabar Yuborish →",
+                success: "✅ Xabar yuborildi! Tez orada javob beraman.",
+                fcta: "Bog'lanish →",
+                tg_chat: "Telegram da yozing",
+                or: "yoki"
+            },
+            ru: {
+                available: "Открыт для предложений",
+                role: "Junior .NET Разработчик · Backend & Full-Stack",
+                about_title: "Обо мне",
+                about: "Целеустремлённый Junior .NET разработчик с практическим опытом создания веб-приложений с использованием C#, ASP.NET Core и PostgreSQL. Увлечён чистой архитектурой и дизайном REST API. В настоящее время расширяю знания во фронтенде с Angular, TypeScript и HTML — стремлюсь стать full-stack инженером.",
+                live_badge: "LIVE",
+                live_demo: "🌐 Открыть сайт",
+                live_src: "⌥ Исходный код",
+                projects: "Другие Проекты",
+                skills: "Навыки",
+                learning: "Изучаю сейчас:",
+                education: "Образование",
+                edu_school: "Национальный университет Узбекистана",
+                edu_deg: "Бакалавр — Computer Science",
+                edu_badge: "Обучается",
+                languages: "Языки",
+                uzbek: "Узбекский",
+                english: "Английский",
+                russian: "Русский",
+                native: "Родной",
+                contact: "Написать мне",
+                name_label: "Имя",
+                email_label: "Email",
+                subject_label: "Тема",
+                message_label: "Сообщение",
+                name_placeholder: "John Doe",
+                email_placeholder: "john@company.com",
+                subject_placeholder: "Предложение о работе / Сотрудничество",
+                message_placeholder: "Привет Эльшод...",
+                send: "Отправить →",
+                success: "✅ Сообщение отправлено! Скоро отвечу.",
+                fcta: "Нанять →",
+                tg_chat: "Написать в Telegram",
+                or: "или"
+            }
+        };
+
+        // Language switching
+        let currentLang = 'en';
+
+        function updateLanguage(lang) {
+            currentLang = lang;
+            const trans = translations[lang];
+            
+            // Update all elements with data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (trans[key]) {
+                    element.textContent = trans[key];
+                }
+            });
+
+            // Update placeholders
+            document.querySelectorAll('[data-ph]').forEach(element => {
+                const key = element.getAttribute('data-ph');
+                if (trans[key]) {
+                    element.placeholder = trans[key];
+                }
+            });
+
+            // Update active language button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+        }
+
+        // Language switcher event listeners
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                updateLanguage(btn.getAttribute('data-lang'));
+            });
+        });
+
+        // GitHub API fetch
+        async function fetchGitHubStats() {
+            try {
+                const response = await fetch('https://api.github.com/users/ElshodDev');
+                const data = await response.json();
+                
+                document.getElementById('stars').textContent = data.public_repos * 2; // Approximate
+                document.getElementById('repos').textContent = data.public_repos;
+                document.getElementById('followers').textContent = data.followers;
+                document.getElementById('forks').textContent = data.public_repos; // Approximate
+            } catch (error) {
+                console.error('Failed to fetch GitHub stats:', error);
+            }
+        }
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                subject: formData.get('subject'),
+                message: formData.get('message')
+            };
+
+            const messageDiv = document.getElementById('formMessage');
+            const submitBtn = e.target.querySelector('.form-submit');
+            
+            try {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+                
+                const response = await fetch('https://formspree.io/f/xeerkgbl', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    messageDiv.className = 'form-message success';
+                    messageDiv.textContent = translations[currentLang].success;
+                    e.target.reset();
+                    
+                    setTimeout(() => {
+                        messageDiv.textContent = '';
+                    }, 5000);
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                messageDiv.className = 'form-message error';
+                messageDiv.textContent = '❌ Failed to send message. Please try again.';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = translations[currentLang].send;
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchGitHubStats();
+            updateLanguage('en');
+        });
+    </script>
+</body>
+</html>
