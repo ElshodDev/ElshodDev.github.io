@@ -676,7 +676,7 @@
                     <a href="mailto:elshodibadullayev28@gmail.com" class="contact-link">✉️ Email</a>
                     <a href="https://github.com/ElshodDev" target="_blank" class="contact-link">⌥ GitHub</a>
                     <a href="https://www.linkedin.com/in/elshod-ibodullayev-338940379/" target="_blank" class="contact-link">in LinkedIn</a>
-                    <a href="https://t.me/@Elshod_Developer" target="_blank" class="contact-link">✈️ Telegram</a>
+                    <a href="https://t.me/Elshod_Developer" target="_blank" class="contact-link">✈️ Telegram</a>
                 </div>
             </div>
             <div class="name-section">
@@ -884,11 +884,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>/t.me/@Elshod_Developer" target="_blank" class="contact-link">✈️ Telegram</a>
 
     <!-- Floating Buttons -->
     <div class="floating-buttons">
-        <a href="https://t.me/@Elshod_Developer" target="_blank" class="float-btn">✈️ Telegram</a>
+        <a href="https://t.me/Elshod_Developer" target="_blank" class="float-btn">✈️ Telegram</a>
         <a href="#contact" class="float-btn" data-i18n="fcta">Hire Me →</a>
     </div>
 
@@ -1041,15 +1041,19 @@
         // GitHub API fetch
         async function fetchGitHubStats() {
             try {
-                const response = await fetch('https://api.github.com/users/ElshodDev');
-                const data = await response.json();
+                const user = await fetch('https://api.github.com/users/ElshodDev').then(r => r.json());
+                document.getElementById('repos').textContent = user.public_repos;
+                document.getElementById('followers').textContent = user.followers;
                 
-                document.getElementById('stars').textContent = data.public_repos * 2; // Approximate
-                document.getElementById('repos').textContent = data.public_repos;
-                document.getElementById('followers').textContent = data.followers;
-                document.getElementById('forks').textContent = data.public_repos; // Approximate
+                const repos = await fetch('https://api.github.com/users/ElshodDev/repos?per_page=100').then(r => r.json());
+                if (Array.isArray(repos)) {
+                    const stars = repos.reduce((s, r) => s + r.stargazers_count, 0);
+                    const forks = repos.reduce((s, r) => s + r.forks_count, 0);
+                    document.getElementById('stars').textContent = stars;
+                    document.getElementById('forks').textContent = forks;
+                }
             } catch (error) {
-                console.error('Failed to fetch GitHub stats:', error);
+                console.error('GitHub stats error:', error);
             }
         }
 
