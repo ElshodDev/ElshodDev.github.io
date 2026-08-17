@@ -1,333 +1,601 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elshod Ibodullayev - Junior .NET Developer</title>
+    <meta name="description" content="Elshod Ibodullayev — Junior .NET Developer. Portfolio showcasing backend & full-stack projects.">
+    <meta name="keywords" content="Elshod Ibodullayev, .NET Developer, ASP.NET Core, Portfolio, Uzbekistan">
+    <meta name="author" content="Elshod Ibodullayev">
+    <title>Elshod Ibodullayev — Junior .NET Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* ===== CSS CUSTOM PROPERTIES ===== */
         :root {
-            --bg: #080C12;
-            --surface: #0E1420;
-            --border: #1C2535;
-            --accent: #00E5FF;
-            --purple: #7C3AED;
-            --green: #22C55E;
-            --text: #E8EDF5;
-            --muted: #5B6B82;
-            --tag-bg: #111827;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 50%;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.15);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.2);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: rgba(17, 24, 39, 0.7);
+            --bg-card-hover: rgba(17, 24, 39, 0.9);
+            --border: rgba(55, 65, 81, 0.5);
+            --border-hover: rgba(0, 229, 255, 0.4);
+            --accent: #00E5FF;
+            --accent-glow: rgba(0, 229, 255, 0.15);
+            --purple: #8B5CF6;
+            --purple-glow: rgba(139, 92, 246, 0.15);
+            --green: #22C55E;
+            --green-glow: rgba(34, 197, 94, 0.15);
+            --orange: #F59E0B;
+            --red: #EF4444;
+            --text-primary: #F3F4F6;
+            --text-secondary: #9CA3AF;
+            --text-muted: #6B7280;
+            --tag-bg: rgba(17, 24, 39, 0.8);
+            --glass-bg: rgba(17, 24, 39, 0.6);
+            --glass-border: rgba(55, 65, 81, 0.4);
+            --noise-opacity: 0.03;
+            --glow-1: rgba(0, 229, 255, 0.08);
+            --glow-2: rgba(139, 92, 246, 0.08);
+        }
+
+        /* Light Theme */
+        [data-theme="light"] {
+            --bg-primary: #F8FAFC;
+            --bg-secondary: #FFFFFF;
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --bg-card-hover: rgba(255, 255, 255, 0.95);
+            --border: rgba(209, 213, 219, 0.6);
+            --border-hover: rgba(0, 150, 200, 0.4);
+            --accent: #0891B2;
+            --accent-glow: rgba(8, 145, 178, 0.1);
+            --purple: #7C3AED;
+            --purple-glow: rgba(124, 58, 237, 0.1);
+            --green: #16A34A;
+            --green-glow: rgba(22, 163, 74, 0.1);
+            --orange: #D97706;
+            --red: #DC2626;
+            --text-primary: #111827;
+            --text-secondary: #4B5563;
+            --text-muted: #9CA3AF;
+            --tag-bg: rgba(243, 244, 246, 0.9);
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(209, 213, 219, 0.5);
+            --noise-opacity: 0.02;
+            --glow-1: rgba(8, 145, 178, 0.06);
+            --glow-2: rgba(124, 58, 237, 0.06);
+        }
+
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'DM Mono', monospace;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* Background Effects */
-        .bg-grid {
+        body {
+            font-family: var(--font-main);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: background var(--transition), color var(--transition);
+        }
+
+        /* ===== BACKGROUND EFFECTS ===== */
+        .bg-noise {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: var(--noise-opacity);
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 1;
         }
 
-        .glow-orb {
+        .bg-glow {
             position: fixed;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.3;
+            border-radius: var(--radius-full);
+            filter: blur(120px);
             pointer-events: none;
-            z-index: 2;
+            z-index: 0;
+            transition: background var(--transition);
         }
 
-        .glow-orb.blue {
-            width: 400px;
-            height: 400px;
-            background: var(--accent);
-            top: -200px;
-            left: -200px;
-            animation: float 8s ease-in-out infinite;
+        .bg-glow.glow-1 {
+            width: 500px; height: 500px;
+            background: var(--glow-1);
+            top: -150px; left: -100px;
+            animation: glowFloat 12s ease-in-out infinite;
         }
 
-        .glow-orb.purple {
-            width: 300px;
-            height: 300px;
-            background: var(--purple);
-            bottom: -150px;
-            right: -150px;
-            animation: float 10s ease-in-out infinite reverse;
+        .bg-glow.glow-2 {
+            width: 400px; height: 400px;
+            background: var(--glow-2);
+            bottom: -100px; right: -100px;
+            animation: glowFloat 15s ease-in-out infinite reverse;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(30px, -30px); }
+        .bg-glow.glow-3 {
+            width: 300px; height: 300px;
+            background: var(--glow-1);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation: glowFloat 10s ease-in-out infinite 3s;
+        }
+
+        @keyframes glowFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* ===== TOP NAVIGATION ===== */
+        .top-nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: background var(--transition), border var(--transition);
+        }
+
+        .nav-logo {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 4px;
+        }
+
+        .nav-link {
+            padding: 6px 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+            background: var(--accent-glow);
         }
 
         /* Language Switcher */
         .lang-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
             display: flex;
-            gap: 8px;
+            gap: 2px;
+            background: var(--tag-bg);
+            border-radius: var(--radius-sm);
+            padding: 2px;
+            border: 1px solid var(--border);
         }
 
         .lang-btn {
-            padding: 8px 12px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--muted);
-            font-family: 'Syne', sans-serif;
+            padding: 4px 10px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 8px;
+            border-radius: 6px;
+            transition: all var(--transition);
         }
 
         .lang-btn.active {
             background: var(--accent);
-            color: var(--bg);
-            border-color: var(--accent);
+            color: var(--bg-primary);
         }
 
         .lang-btn:hover:not(.active) {
-            border-color: var(--accent);
-            color: var(--text);
+            color: var(--text-primary);
         }
 
-        /* Main Container */
+        /* Theme Toggle */
+        .theme-toggle {
+            width: 36px; height: 36px;
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all var(--transition);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ===== MAIN CONTAINER ===== */
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 80px 20px 40px;
             position: relative;
             z-index: 10;
         }
 
-        /* Header */
-        header {
-            background: var(--surface);
+        /* ===== GLASS CARD ===== */
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: fadeUp 0.6s ease-out;
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-bottom: 24px;
+            transition: all var(--transition);
         }
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--purple), var(--accent));
-            background-size: 200% 100%;
-            animation: shimmer 3s linear infinite;
+        .card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+            box-shadow: 0 8px 32px rgba(0, 229, 255, 0.06);
         }
 
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+        }
+
+        .card-title .icon {
+            font-size: 20px;
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ===== HEADER / HERO ===== */
+        .hero {
+            padding: 50px 0 30px;
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .avatar {
+            width: 110px; height: 110px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-main);
+            font-weight: 800;
+            font-size: 38px;
+            color: #fff;
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            top: -4px; left: -4px;
+            width: 118px; height: 118px;
+            border-radius: var(--radius-full);
+            border: 2px solid var(--accent);
+            opacity: 0.4;
+            animation: avatarPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes avatarPulse {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.08); opacity: 0.15; }
+        }
+
+        .avatar-status {
+            position: absolute;
+            bottom: 6px; right: 6px;
+            width: 20px; height: 20px;
+            background: var(--green);
+            border: 3px solid var(--bg-primary);
+            border-radius: var(--radius-full);
+            z-index: 3;
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+            50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+        }
+
+        .hero-content {
+            flex: 1;
         }
 
         .status-badge {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 16px;
-            background: rgba(34, 197, 94, 0.1);
+            padding: 6px 14px;
+            background: var(--green-glow);
             border: 1px solid var(--green);
-            border-radius: 20px;
-            font-size: 14px;
+            border-radius: var(--radius-xl);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--green);
+            margin-bottom: 14px;
         }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
+        .status-badge .dot {
+            width: 7px; height: 7px;
             background: var(--green);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
+            border-radius: var(--radius-full);
+            animation: statusPulse 2s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.2); }
-        }
-
-        .contact-links {
-            display: flex;
-            gap: 16px;
-        }
-
-        .contact-link {
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 14px;
-        }
-
-        .contact-link:hover {
-            color: var(--accent);
-        }
-
-        .name-section {
-            margin-bottom: 20px;
-        }
-
-        .name {
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 48px;
+        .hero-name {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 800;
             line-height: 1.1;
             margin-bottom: 8px;
+            letter-spacing: -0.02em;
         }
 
-        .name .accent {
+        .hero-name .accent {
             color: var(--accent);
         }
 
-        .role-badge {
-            display: inline-block;
-            padding: 8px 16px;
-            background: var(--tag-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            font-size: 14px;
-            color: var(--muted);
-        }
-
-        .github-stats {
-            display: flex;
-            gap: 20px;
-            font-size: 14px;
-            color: var(--muted);
-        }
-
-        .github-stats span {
+        .typing-wrapper {
             display: flex;
             align-items: center;
             gap: 4px;
+            margin-bottom: 20px;
         }
 
-        /* Live Project Card */
+        .typing-text {
+            font-family: var(--font-mono);
+            font-size: clamp(14px, 2vw, 16px);
+            color: var(--text-secondary);
+        }
+
+        .typing-cursor {
+            width: 2px;
+            height: 20px;
+            background: var(--accent);
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .stat-item .stat-num {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+        }
+
+        .scroll-indicator {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0 10px;
+            animation: bounceDown 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator span {
+            font-size: 24px;
+            color: var(--text-muted);
+        }
+
+        @keyframes bounceDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* ===== CONTACT LINKS (Hero) ===== */
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .hero-link {
+            padding: 6px 14px;
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        /* ===== LIVE PROJECT ===== */
         .live-project {
-            background: var(--surface);
-            border: 2px solid var(--green);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
             position: relative;
-            animation: fadeUp 0.65s ease-out;
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+            border: 1.5px solid var(--green);
+            box-shadow: 0 0 24px var(--green-glow);
         }
 
         .live-badge {
             position: absolute;
-            top: -12px;
-            left: 30px;
+            top: -11px; left: 24px;
             background: var(--green);
-            color: var(--bg);
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-family: 'Syne', sans-serif;
-            font-weight: 600;
-            font-size: 12px;
-            animation: pulse 2s ease-in-out infinite;
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: var(--radius-xl);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .project-content h3 {
-            font-family: 'Syne', sans-serif;
+        .live-badge .dot {
+            width: 6px; height: 6px;
+            background: #fff;
+            border-radius: var(--radius-full);
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        .project-main-title {
             font-size: 24px;
-            margin-bottom: 12px;
+            font-weight: 800;
+            margin-bottom: 8px;
         }
 
-        .project-content p {
-            color: var(--muted);
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.7;
             margin-bottom: 20px;
         }
 
         .project-buttons {
             display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
         }
 
         .btn {
-            padding: 12px 24px;
-            background: var(--accent);
-            color: var(--bg);
+            padding: 10px 22px;
             border: none;
-            border-radius: 8px;
-            font-family: 'Syne', sans-serif;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-main);
             font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s ease;
+            transition: all var(--transition);
         }
 
-        .btn:hover {
+        .btn-primary {
+            background: var(--accent);
+            color: #0a0e17;
+        }
+
+        .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 229, 255, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 229, 255, 0.3);
         }
 
-        .btn.secondary {
+        .btn-outline {
             background: transparent;
             color: var(--accent);
-            border: 1px solid var(--accent);
+            border: 1.5px solid var(--accent);
         }
 
-        .btn.secondary:hover {
+        .btn-outline:hover {
             background: var(--accent);
-            color: var(--bg);
+            color: #0a0e17;
         }
 
         .tech-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
 
         .tech-tag {
             padding: 4px 12px;
             background: var(--tag-bg);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: var(--radius-xl);
             font-size: 12px;
-            color: var(--muted);
-            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            transition: all var(--transition);
         }
 
         .tech-tag:hover {
@@ -335,406 +603,902 @@
             color: var(--accent);
         }
 
-        /* Two Column Grid */
+        .tech-tag.learning {
+            border-style: dashed;
+            border-color: var(--purple);
+            color: var(--purple);
+        }
+
+        /* ===== TWO COLUMN GRID ===== */
         .main-grid {
             display: grid;
-            grid-template-columns: 1fr 295px;
-            gap: 30px;
-            animation: fadeUp 0.7s ease-out;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
         }
 
-        /* Cards */
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 20px;
-            transition: border-color 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: var(--accent);
-        }
-
-        .card h2 {
-            font-family: 'Syne', sans-serif;
-            font-size: 20px;
-            margin-bottom: 16px;
-            color: var(--text);
-        }
-
-        /* About Section */
-        .about p {
-            color: var(--muted);
+        /* ===== ABOUT ===== */
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 15px;
             line-height: 1.8;
         }
 
-        /* Projects Section */
+        /* ===== TIMELINE ===== */
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 4px;
+            bottom: 4px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--purple), var(--green));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 28px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -24px;
+            top: 5px;
+            width: 14px; height: 14px;
+            border-radius: var(--radius-full);
+            border: 3px solid var(--accent);
+            background: var(--bg-primary);
+            z-index: 2;
+        }
+
+        .timeline-dot.active {
+            background: var(--accent);
+            box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+        }
+
+        .timeline-date {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+
+        .timeline-subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .timeline-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .timeline-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: var(--radius-xl);
+            margin-top: 6px;
+        }
+
+        .badge-active {
+            background: var(--green-glow);
+            color: var(--green);
+            border: 1px solid var(--green);
+        }
+
+        .badge-completed {
+            background: var(--accent-glow);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        /* ===== PROJECTS ===== */
         .project-item {
-            padding: 20px 0;
+            padding: 18px 0;
             border-bottom: 1px solid var(--border);
         }
 
         .project-item:last-child {
             border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .project-item:first-child {
+            padding-top: 0;
         }
 
         .project-header {
             display: flex;
             justify-content: space-between;
             align-items: start;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .project-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 15px;
         }
 
         .project-meta {
-            font-size: 12px;
-            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
             text-align: right;
         }
 
-        .project-desc {
-            color: var(--muted);
-            font-size: 14px;
+        .project-item-desc {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        /* ===== SKILLS WITH PROGRESS ===== */
+        .skill-group {
+            margin-bottom: 20px;
+        }
+
+        .skill-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-group-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 12px;
         }
 
-        /* Contact Form */
+        .skill-bar-item {
+            margin-bottom: 14px;
+        }
+
+        .skill-bar-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-bar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .skill-bar-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .skill-bar-level {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .skill-bar-track {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+            width: 0;
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-bar-fill.learning {
+            background: linear-gradient(90deg, var(--purple), var(--orange));
+        }
+
+        .skill-tags-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        /* ===== STATS COUNTERS (sidebar) ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .stat-card {
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            text-align: center;
+            transition: all var(--transition);
+        }
+
+        .stat-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .stat-card .stat-number {
+            font-family: var(--font-mono);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-card .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        /* ===== EDUCATION ===== */
+        .edu-item {
+            padding: 16px;
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+        }
+
+        .edu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .edu-school {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .edu-degree {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .edu-years {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .edu-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--purple-glow);
+            border: 1px solid var(--purple);
+            border-radius: var(--radius-xl);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--purple);
+        }
+
+        /* ===== LANGUAGES ===== */
+        .lang-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .lang-item:last-child {
+            border-bottom: none;
+        }
+
+        .lang-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .lang-level-bar {
+            display: flex;
+            gap: 4px;
+        }
+
+        .lang-dot {
+            width: 10px; height: 10px;
+            border-radius: var(--radius-full);
+            background: var(--border);
+            transition: all var(--transition);
+        }
+
+        .lang-dot.filled {
+            background: var(--accent);
+            box-shadow: 0 0 6px var(--accent-glow);
+        }
+
+        /* ===== CERTIFICATES ===== */
+        .cert-item {
+            display: flex;
+            align-items: start;
+            gap: 14px;
+            padding: 14px;
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            margin-bottom: 10px;
+            transition: all var(--transition);
+        }
+
+        .cert-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .cert-item:hover {
+            border-color: var(--border-hover);
+        }
+
+        .cert-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .cert-info {
+            flex: 1;
+        }
+
+        .cert-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .cert-issuer {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .cert-date {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ===== CONTACT FORM ===== */
         .form-group {
             margin-bottom: 16px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: var(--muted);
+            margin-bottom: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
-            background: var(--bg);
+            padding: 12px 14px;
+            background: var(--bg-primary);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text);
-            font-family: 'DM Mono', monospace;
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-family: var(--font-main);
             font-size: 14px;
-            transition: border-color 0.3s ease;
+            transition: all var(--transition);
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .form-group input.error,
+        .form-group textarea.error {
+            border-color: var(--red);
         }
 
         .form-group textarea {
-            min-height: 120px;
+            min-height: 100px;
             resize: vertical;
         }
 
-        .form-submit {
+        .form-submit-btn {
             width: 100%;
-            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-submit-btn .spinner {
+            display: none;
+            width: 16px; height: 16px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: var(--radius-full);
+            animation: spin 0.6s linear infinite;
+        }
+
+        .form-submit-btn.loading .spinner {
+            display: inline-block;
+        }
+
+        .form-submit-btn.loading .btn-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         .form-divider {
             text-align: center;
-            color: var(--muted);
-            font-size: 14px;
-            margin-bottom: 16px;
+            color: var(--text-muted);
+            font-size: 13px;
+            margin: 14px 0;
+            position: relative;
         }
 
-        .telegram-btn {
+        .form-divider::before,
+        .form-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: calc(50% - 20px);
+            height: 1px;
+            background: var(--border);
+        }
+
+        .form-divider::before { left: 0; }
+        .form-divider::after { right: 0; }
+
+        .btn-telegram {
             width: 100%;
             background: var(--purple);
-            color: var(--text);
+            color: #fff;
         }
 
-        .telegram-btn:hover {
-            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+        .btn-telegram:hover {
+            box-shadow: 0 6px 20px var(--purple-glow);
+            transform: translateY(-2px);
         }
 
         .form-message {
             padding: 12px;
-            border-radius: 8px;
-            margin-top: 16px;
+            border-radius: var(--radius-sm);
+            margin-top: 14px;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 500;
+            animation: fadeIn 0.3s ease;
         }
 
         .form-message.success {
-            background: rgba(34, 197, 94, 0.1);
+            background: var(--green-glow);
             border: 1px solid var(--green);
             color: var(--green);
         }
 
-        .form-message.error {
+        .form-message.error-msg {
             background: rgba(239, 68, 68, 0.1);
-            border: 1px solid #ef4444;
-            color: #ef4444;
+            border: 1px solid var(--red);
+            color: var(--red);
         }
 
-        /* Skills Section */
-        .skills-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .skill-category {
-            margin-bottom: 8px;
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 30px 0 20px;
+            font-size: 13px;
+            color: var(--text-muted);
         }
 
-        .skill-category strong {
-            color: var(--text);
-            font-size: 14px;
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
         }
 
-        .skill-items {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
+        .footer a:hover {
+            text-decoration: underline;
         }
 
-        .learning-tag {
-            border-color: var(--purple) !important;
-            color: var(--purple) !important;
-            border-style: dashed !important;
-        }
-
-        /* Education Section */
-        .edu-item {
-            margin-bottom: 16px;
-        }
-
-        .edu-school {
-            font-family: 'Syne', sans-serif;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .edu-degree {
-            color: var(--muted);
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .edu-years {
-            color: var(--muted);
-            font-size: 12px;
-            margin-bottom: 8px;
-        }
-
-        .edu-badge {
-            display: inline-block;
-            padding: 4px 8px;
-            background: rgba(124, 58, 237, 0.1);
-            border: 1px solid var(--purple);
-            border-radius: 12px;
-            font-size: 12px;
-            color: var(--purple);
-        }
-
-        /* Languages Section */
-        .lang-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .lang-name {
-            font-size: 14px;
-        }
-
-        .lang-level {
-            display: flex;
-            gap: 4px;
-        }
-
-        .lang-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--border);
-        }
-
-        .lang-dot.filled {
-            background: var(--accent);
-        }
-
-        /* Floating Buttons */
-        .floating-buttons {
+        /* ===== FLOATING BUTTONS ===== */
+        .floating-btns {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 24px; right: 24px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
             z-index: 100;
         }
 
         .float-btn {
-            padding: 12px 20px;
-            background: var(--surface);
+            padding: 10px 18px;
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
             text-decoration: none;
-            font-family: 'Syne', sans-serif;
             font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            font-size: 13px;
+            transition: all var(--transition);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .float-btn:hover {
             transform: translateY(-2px);
             border-color: var(--accent);
-            box-shadow: 0 8px 20px rgba(0, 229, 255, 0.2);
+            box-shadow: var(--shadow-lg);
         }
 
-        /* Animations */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 24px; left: 24px;
+            width: 40px; height: 40px;
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: all var(--transition);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .back-to-top:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
             .main-grid {
                 grid-template-columns: 1fr;
             }
+        }
 
-            .header-top {
+        @media (max-width: 768px) {
+            .container {
+                padding: 70px 16px 30px;
+            }
+
+            .hero {
                 flex-direction: column;
-                gap: 16px;
+                text-align: center;
+                padding: 30px 0 20px;
             }
 
-            .contact-links {
-                flex-wrap: wrap;
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
 
-            .name {
-                font-size: 36px;
+            .hero-stats {
+                justify-content: center;
             }
 
-            .github-stats {
-                flex-wrap: wrap;
+            .hero-links {
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .project-header {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .project-meta {
+                text-align: left;
             }
 
             .project-buttons {
                 flex-direction: column;
             }
 
-            .floating-buttons {
-                bottom: 20px;
-                right: 20px;
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .floating-btns {
+                bottom: 16px; right: 16px;
+            }
+
+            .back-to-top {
+                bottom: 16px; left: 16px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .avatar {
+                width: 90px; height: 90px;
+                font-size: 32px;
+            }
+
+            .avatar-ring {
+                width: 98px; height: 98px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-name {
+                font-size: 28px;
+            }
+
+            .stat-item {
+                font-size: 12px;
+            }
+
+            .hero-link {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+        }
+
+        /* Mobile bottom tabs */
+        .mobile-tabs {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-tabs {
+                display: flex;
+                position: fixed;
+                bottom: 0; left: 0; right: 0;
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-top: 1px solid var(--glass-border);
+                z-index: 999;
+                padding: 6px 0;
+                justify-content: space-around;
+            }
+
+            .mobile-tab {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 2px;
+                padding: 6px 12px;
+                color: var(--text-muted);
+                text-decoration: none;
+                font-size: 10px;
+                font-weight: 600;
+                transition: color var(--transition);
+            }
+
+            .mobile-tab .tab-icon {
+                font-size: 18px;
+            }
+
+            .mobile-tab:hover,
+            .mobile-tab.active {
+                color: var(--accent);
+            }
+
+            .floating-btns {
+                bottom: 70px;
+            }
+
+            .back-to-top {
+                bottom: 70px;
+            }
+
+            body {
+                padding-bottom: 60px;
             }
         }
     </style>
 </head>
 <body>
     <!-- Background Effects -->
-    <div class="bg-grid"></div>
-    <div class="glow-orb blue"></div>
-    <div class="glow-orb purple"></div>
+    <div class="bg-noise"></div>
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
 
-    <!-- Language Switcher -->
-    <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="uz">UZ</button>
-        <button class="lang-btn" data-lang="ru">RU</button>
-    </div>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <a href="#" class="nav-logo">&lt;EI /&gt;</a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#about" class="nav-link" data-i18n="nav_about">About</a>
+                <a href="#timeline" class="nav-link" data-i18n="nav_timeline">Timeline</a>
+                <a href="#projects" class="nav-link" data-i18n="nav_projects">Projects</a>
+                <a href="#skills" class="nav-link" data-i18n="nav_skills">Skills</a>
+                <a href="#contact" class="nav-link" data-i18n="nav_contact">Contact</a>
+            </div>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="uz">UZ</button>
+                <button class="lang-btn" data-lang="ru">RU</button>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        </div>
+    </nav>
 
     <!-- Main Container -->
     <div class="container">
-        <!-- Header -->
-        <header>
-            <div class="header-top">
+        <!-- Hero / Header -->
+        <section class="hero reveal" id="hero">
+            <div class="avatar-wrapper">
+                <div class="avatar">EI</div>
+                <div class="avatar-ring"></div>
+                <div class="avatar-status"></div>
+            </div>
+            <div class="hero-content">
                 <div class="status-badge">
-                    <div class="status-dot"></div>
+                    <span class="dot"></span>
                     <span data-i18n="available">Open to opportunities</span>
                 </div>
-                <div class="contact-links">
-                    <a href="tel:+998995043004" class="contact-link">📞 +998 99 504 30 04</a>
-                    <a href="mailto:elshodibadullayev28@gmail.com" class="contact-link">✉️ Email</a>
-                    <a href="https://github.com/ElshodDev" target="_blank" class="contact-link">⌥ GitHub</a>
-                    <a href="https://www.linkedin.com/in/elshod-ibodullayev-338940379/" target="_blank" class="contact-link">in LinkedIn</a>
-                    <a href="https://t.me/Elshod_Developer" target="_blank" class="contact-link">✈️ Telegram</a>
+                <h1 class="hero-name">Ibodullayev <span class="accent">Elshod</span></h1>
+                <div class="typing-wrapper">
+                    <span class="typing-text" id="typingText"></span>
+                    <span class="typing-cursor"></span>
+                </div>
+                <div class="hero-stats" id="githubStats">
+                    <div class="stat-item">⭐ <span class="stat-num" id="stars">0</span> stars</div>
+                    <div class="stat-item">📁 <span class="stat-num" id="repos">0</span> repos</div>
+                    <div class="stat-item">👥 <span class="stat-num" id="followers">0</span> followers</div>
+                    <div class="stat-item">🔀 <span class="stat-num" id="forks">0</span> forks</div>
+                </div>
+                <div class="hero-links">
+                    <a href="tel:+998995043004" class="hero-link">📞 +998 99 504 30 04</a>
+                    <a href="mailto:elshodibadullayev28@gmail.com" class="hero-link">✉️ Email</a>
+                    <a href="https://github.com/ElshodDev" target="_blank" class="hero-link">⌥ GitHub</a>
+                    <a href="https://www.linkedin.com/in/elshod-ibodullayev-338940379/" target="_blank" class="hero-link">in LinkedIn</a>
+                    <a href="https://t.me/Elshod_Developer" target="_blank" class="hero-link">✈️ Telegram</a>
                 </div>
             </div>
-            <div class="name-section">
-                <h1 class="name">Ibodullayev <span class="accent">Elshod</span></h1>
-                <div class="role-badge" data-i18n="role">Junior .NET Developer (Backend & Full-Stack)</div>
-            </div>
-            <div class="github-stats" id="githubStats">
-                <span>⭐ <span id="stars">0</span> stars</span>
-                <span>📁 <span id="repos">0</span> repos</span>
-                <span>👥 <span id="followers">0</span> followers</span>
-                <span>🔀 <span id="forks">0</span> forks</span>
-            </div>
-        </header>
+        </section>
+
+        <div class="scroll-indicator reveal reveal-delay-2">
+            <span>↓</span>
+        </div>
 
         <!-- Live Project Card -->
-        <div class="live-project">
-            <div class="live-badge" data-i18n="live_badge">LIVE NOW</div>
-            <div class="project-content">
-                <h3>Mulkchi</h3>
-                <p>O'zbekiston uchun ko'chmas mulk platformasi — uy-joy sotish, ijara va agent tizimi. Built with ASP.NET Core 9 + Clean Architecture.</p>
-                <div class="project-buttons">
-                    <a href="https://github.com/ElshodDev/Mulkchi" target="_blank" class="btn">
-                        <span data-i18n="live_demo">🌐 Live Demo</span>
-                    </a>
-                    <a href="https://github.com/ElshodDev/Mulkchi" target="_blank" class="btn secondary">
-                        <span data-i18n="live_src">⌥ Source Code</span>
-                    </a>
-                </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">ASP.NET Core</span>
-                    <span class="tech-tag">EF Core</span>
-                    <span class="tech-tag">PostgreSQL</span>
-                    <span class="tech-tag">JWT</span>
-                    <span class="tech-tag">Docker</span>
-                </div>
+        <section class="card live-project reveal" id="live-project">
+            <div class="live-badge">
+                <span class="dot"></span>
+                <span data-i18n="live_badge">LIVE NOW</span>
             </div>
-        </div>
+            <h2 class="project-main-title">Mulkchi</h2>
+            <p class="project-desc" data-i18n="mulkchi_desc">O'zbekiston uchun ko'chmas mulk platformasi — uy-joy sotish, ijara va agent tizimi. Built with ASP.NET Core 9 + Clean Architecture.</p>
+            <div class="project-buttons">
+                <a href="https://github.com/ElshodDev/Mulkchi" target="_blank" class="btn btn-primary">
+                    <span data-i18n="live_demo">🌐 Live Demo</span>
+                </a>
+                <a href="https://github.com/ElshodDev/Mulkchi" target="_blank" class="btn btn-outline">
+                    <span data-i18n="live_src">⌥ Source Code</span>
+                </a>
+            </div>
+            <div class="tech-tags">
+                <span class="tech-tag">ASP.NET Core 9</span>
+                <span class="tech-tag">Clean Architecture</span>
+                <span class="tech-tag">EF Core</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">JWT</span>
+                <span class="tech-tag">Docker</span>
+            </div>
+        </section>
 
         <!-- Two Column Grid -->
         <div class="main-grid">
             <!-- Left Column -->
             <div class="left-column">
                 <!-- About -->
-                <div class="card about">
-                    <h2 data-i18n="about_title">About</h2>
-                    <p data-i18n="about">Enthusiastic Junior .NET Developer with hands-on experience building web applications using C#, ASP.NET Core, and PostgreSQL. Passionate about clean architecture and REST API design. Currently expanding into frontend with Angular, TypeScript, and HTML — eager to grow into a full-stack engineer.</p>
-                </div>
+                <section class="card reveal" id="about">
+                    <div class="card-title">
+                        <span class="icon">👨‍💻</span>
+                        <span data-i18n="about_title">About</span>
+                    </div>
+                    <p class="about-text" data-i18n="about">Enthusiastic Junior .NET Developer with hands-on experience building web applications using C#, ASP.NET Core, and PostgreSQL. Passionate about clean architecture and REST API design. Currently expanding into frontend with Angular, TypeScript, and HTML — eager to grow into a full-stack engineer.</p>
+                </section>
+
+                <!-- Timeline -->
+                <section class="card reveal" id="timeline">
+                    <div class="card-title">
+                        <span class="icon">🚀</span>
+                        <span data-i18n="timeline_title">Journey</span>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item reveal reveal-delay-1">
+                            <div class="timeline-dot active"></div>
+                            <div class="timeline-date" data-i18n="tl_mulkchi_date">2024 — Present</div>
+                            <div class="timeline-title" data-i18n="tl_mulkchi_title">Mulkchi — Real Estate Platform</div>
+                            <div class="timeline-subtitle" data-i18n="tl_mulkchi_sub">Personal Project · Full-Stack</div>
+                            <div class="timeline-desc" data-i18n="tl_mulkchi_desc">Building a real estate platform for Uzbekistan with ASP.NET Core 9, Clean Architecture, JWT auth, and Docker deployment.</div>
+                            <span class="timeline-badge badge-active" data-i18n="tl_in_progress">In Progress</span>
+                        </div>
+                        <div class="timeline-item reveal reveal-delay-2">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date" data-i18n="tl_ecom_date">2024</div>
+                            <div class="timeline-title" data-i18n="tl_ecom_title">E-Commerce REST API</div>
+                            <div class="timeline-subtitle" data-i18n="tl_ecom_sub">Personal Project · Backend</div>
+                            <div class="timeline-desc" data-i18n="tl_ecom_desc">Full-featured RESTful API with JWT authentication, role-based authorization, and Swagger documentation. Containerized with Docker.</div>
+                            <span class="timeline-badge badge-completed" data-i18n="tl_completed">Completed</span>
+                        </div>
+                        <div class="timeline-item reveal reveal-delay-3">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date" data-i18n="tl_task_date">2023</div>
+                            <div class="timeline-title" data-i18n="tl_task_title">Task Management System</div>
+                            <div class="timeline-subtitle" data-i18n="tl_task_sub">University · Web App</div>
+                            <div class="timeline-desc" data-i18n="tl_task_desc">Multi-user task tracker built on Clean Architecture with EF Core and MS SQL Server.</div>
+                            <span class="timeline-badge badge-completed" data-i18n="tl_completed2">Completed</span>
+                        </div>
+                        <div class="timeline-item reveal reveal-delay-4">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date" data-i18n="tl_uni_date">2022 — 2026</div>
+                            <div class="timeline-title" data-i18n="tl_uni_title">National University of Uzbekistan</div>
+                            <div class="timeline-subtitle" data-i18n="tl_uni_sub">Bachelor of Science — Computer Science</div>
+                            <span class="timeline-badge badge-active" data-i18n="tl_studying">Studying</span>
+                        </div>
+                    </div>
+                </section>
 
                 <!-- Other Projects -->
-                <div class="card projects">
-                    <h2 data-i18n="projects">Other Projects</h2>
-                    
+                <section class="card reveal" id="projects">
+                    <div class="card-title">
+                        <span class="icon">📂</span>
+                        <span data-i18n="projects">Other Projects</span>
+                    </div>
+
                     <div class="project-item">
                         <div class="project-header">
                             <div class="project-title">E-Commerce REST API</div>
-                            <div class="project-meta">2024<br>Personal Project<br>REST API</div>
+                            <div class="project-meta">2024 · REST API</div>
                         </div>
-                        <div class="project-desc">Full-featured RESTful API with JWT authentication, role-based authorization (Admin/Customer), and complete Swagger documentation. Containerized with Docker.</div>
+                        <div class="project-item-desc" data-i18n="proj_ecom_desc">Full-featured RESTful API with JWT authentication, role-based authorization (Admin/Customer), and complete Swagger documentation. Containerized with Docker.</div>
                         <div class="tech-tags">
                             <span class="tech-tag">ASP.NET Core</span>
                             <span class="tech-tag">EF Core</span>
@@ -748,9 +1512,9 @@
                     <div class="project-item">
                         <div class="project-header">
                             <div class="project-title">Task Management System</div>
-                            <div class="project-meta">2023<br>University<br>Web App</div>
+                            <div class="project-meta">2023 · Web App</div>
                         </div>
-                        <div class="project-desc">Multi-user task tracker built on Clean Architecture with EF Core repository abstraction and MS SQL Server.</div>
+                        <div class="project-item-desc" data-i18n="proj_task_desc">Multi-user task tracker built on Clean Architecture with EF Core repository abstraction and MS SQL Server.</div>
                         <div class="tech-tags">
                             <span class="tech-tag">ASP.NET Core</span>
                             <span class="tech-tag">Clean Architecture</span>
@@ -759,12 +1523,15 @@
                             <span class="tech-tag">LINQ</span>
                         </div>
                     </div>
-                </div>
+                </section>
 
                 <!-- Contact Form -->
-                <div class="card contact" id="contact">
-                    <h2 data-i18n="contact">Get in Touch</h2>
-                    <form id="contactForm">
+                <section class="card reveal" id="contact">
+                    <div class="card-title">
+                        <span class="icon">📬</span>
+                        <span data-i18n="contact">Get in Touch</span>
+                    </div>
+                    <form id="contactForm" novalidate>
                         <div class="form-group">
                             <label data-i18n="name_label">Name</label>
                             <input type="text" name="name" placeholder="John Doe" data-ph="name_placeholder" required>
@@ -781,99 +1548,202 @@
                             <label data-i18n="message_label">Message</label>
                             <textarea name="message" placeholder="Hi Elshod..." data-ph="message_placeholder" required></textarea>
                         </div>
-                        <button type="submit" class="btn form-submit" data-i18n="send">Send Message →</button>
+                        <button type="submit" class="btn btn-primary form-submit-btn">
+                            <span class="btn-text" data-i18n="send">Send Message →</span>
+                            <span class="spinner"></span>
+                        </button>
                         <div id="formMessage"></div>
                         <div class="form-divider" data-i18n="or">or</div>
-                        <a href="https://t.me/YOUR_TELEGRAM" target="_blank" class="btn telegram-btn" data-i18n="tg_chat">Write on Telegram</a>
+                        <a href="https://t.me/Elshod_Developer" target="_blank" class="btn btn-telegram" data-i18n="tg_chat">✈️ Write on Telegram</a>
                     </form>
-                </div>
+                </section>
             </div>
 
             <!-- Right Column -->
             <div class="right-column">
+                <!-- GitHub Stats Cards -->
+                <section class="card reveal">
+                    <div class="card-title">
+                        <span class="icon">📊</span>
+                        <span>GitHub Stats</span>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="statsRepos">0</div>
+                            <div class="stat-label">Repos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="statsStars">0</div>
+                            <div class="stat-label">Stars</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="statsFollowers">0</div>
+                            <div class="stat-label">Followers</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="statsForks">0</div>
+                            <div class="stat-label">Forks</div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Skills -->
-                <div class="card skills">
-                    <h2 data-i18n="skills">Skills</h2>
-                    <div class="skills-list">
-                        <div class="skill-category">
-                            <strong>Languages:</strong>
-                            <div class="skill-items">
-                                <span class="tech-tag">C#</span>
-                                <span class="tech-tag">SQL</span>
+                <section class="card reveal" id="skills">
+                    <div class="card-title">
+                        <span class="icon">🛠️</span>
+                        <span data-i18n="skills">Skills</span>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group-title" data-i18n="sg_languages">Languages</div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span class="skill-bar-name">C#</span>
+                                <span class="skill-bar-level">Advanced</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-width="80"></div>
                             </div>
                         </div>
-                        <div class="skill-category">
-                            <strong>Backend:</strong>
-                            <div class="skill-items">
-                                <span class="tech-tag">ASP.NET Core</span>
-                                <span class="tech-tag">Web API</span>
-                                <span class="tech-tag">EF Core</span>
-                                <span class="tech-tag">LINQ</span>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span class="skill-bar-name">SQL</span>
+                                <span class="skill-bar-level">Intermediate</span>
                             </div>
-                        </div>
-                        <div class="skill-category">
-                            <strong>Databases:</strong>
-                            <div class="skill-items">
-                                <span class="tech-tag">PostgreSQL</span>
-                                <span class="tech-tag">MS SQL Server</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <strong>Tools & DevOps:</strong>
-                            <div class="skill-items">
-                                <span class="tech-tag">Git</span>
-                                <span class="tech-tag">Docker</span>
-                                <span class="tech-tag">Swagger</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <strong data-i18n="learning">Currently Learning:</strong>
-                            <div class="skill-items">
-                                <span class="tech-tag learning-tag">Angular</span>
-                                <span class="tech-tag learning-tag">TypeScript</span>
-                                <span class="tech-tag learning-tag">HTML/CSS</span>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-width="65"></div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group-title">Backend</div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span class="skill-bar-name">ASP.NET Core</span>
+                                <span class="skill-bar-level">Advanced</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-width="78"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span class="skill-bar-name">EF Core / LINQ</span>
+                                <span class="skill-bar-level">Intermediate</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-width="70"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span class="skill-bar-name">REST API Design</span>
+                                <span class="skill-bar-level">Intermediate</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-width="72"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group-title">Databases</div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span class="skill-bar-name">PostgreSQL</span>
+                                <span class="skill-bar-level">Intermediate</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-width="65"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span class="skill-bar-name">MS SQL Server</span>
+                                <span class="skill-bar-level">Intermediate</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-width="60"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group-title">Tools & DevOps</div>
+                        <div class="skill-tags-section">
+                            <span class="tech-tag">Git</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Swagger</span>
+                            <span class="tech-tag">Postman</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group-title" data-i18n="learning">Currently Learning</div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span class="skill-bar-name">Angular</span>
+                                <span class="skill-bar-level">Beginner</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill learning" data-width="30"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span class="skill-bar-name">TypeScript</span>
+                                <span class="skill-bar-level">Beginner</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill learning" data-width="25"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span class="skill-bar-name">HTML / CSS</span>
+                                <span class="skill-bar-level">Beginner</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill learning" data-width="35"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
                 <!-- Education -->
-                <div class="card education">
-                    <h2 data-i18n="education">Education</h2>
+                <section class="card reveal">
+                    <div class="card-title">
+                        <span class="icon">🎓</span>
+                        <span data-i18n="education">Education</span>
+                    </div>
                     <div class="edu-item">
                         <div class="edu-school" data-i18n="edu_school">National University of Uzbekistan</div>
                         <div class="edu-degree" data-i18n="edu_deg">Bachelor of Science — Computer Science</div>
                         <div class="edu-years">2022 – 2026</div>
-                        <div class="edu-badge" data-i18n="edu_badge">In Progress</div>
+                        <span class="edu-badge" data-i18n="edu_badge">In Progress</span>
                     </div>
-                </div>
+                </section>
 
                 <!-- Languages -->
-                <div class="card languages">
-                    <h2 data-i18n="languages">Languages</h2>
-                    <div class="lang-item">
-                        <span class="lang-name" data-i18n="uzbek">Uzbek</span>
-                        <div class="lang-level">
-                            <span class="lang-dot filled"></span>
-                            <span class="lang-dot filled"></span>
-                            <span class="lang-dot filled"></span>
-                            <span class="lang-dot filled"></span>
-                            <span class="lang-dot filled"></span>
-                        </div>
+                <section class="card reveal">
+                    <div class="card-title">
+                        <span class="icon">🌍</span>
+                        <span data-i18n="languages">Languages</span>
                     </div>
                     <div class="lang-item">
-                        <span class="lang-name" data-i18n="english">English</span>
-                        <div class="lang-level">
+                        <span class="lang-name" data-i18n="uzbek">Uzbek</span>
+                        <div class="lang-level-bar">
                             <span class="lang-dot filled"></span>
                             <span class="lang-dot filled"></span>
-                            <span class="lang-dot"></span>
-                            <span class="lang-dot"></span>
-                            <span class="lang-dot"></span>
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
                         </div>
                     </div>
                     <div class="lang-item">
                         <span class="lang-name" data-i18n="russian">Russian</span>
-                        <div class="lang-level">
+                        <div class="lang-level-bar">
                             <span class="lang-dot filled"></span>
                             <span class="lang-dot filled"></span>
                             <span class="lang-dot filled"></span>
@@ -881,21 +1751,98 @@
                             <span class="lang-dot"></span>
                         </div>
                     </div>
-                </div>
+                    <div class="lang-item">
+                        <span class="lang-name" data-i18n="english">English</span>
+                        <div class="lang-level-bar">
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot filled"></span>
+                            <span class="lang-dot"></span>
+                            <span class="lang-dot"></span>
+                            <span class="lang-dot"></span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Certificates -->
+                <section class="card reveal" id="certificates">
+                    <div class="card-title">
+                        <span class="icon">🏆</span>
+                        <span data-i18n="certificates">Certificates & Achievements</span>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">📜</div>
+                        <div class="cert-info">
+                            <div class="cert-title" data-i18n="cert_1_title">ASP.NET Core Fundamentals</div>
+                            <div class="cert-issuer" data-i18n="cert_1_issuer">Self-study & University coursework</div>
+                            <div class="cert-date">2024</div>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">🐳</div>
+                        <div class="cert-info">
+                            <div class="cert-title" data-i18n="cert_2_title">Docker & Containerization</div>
+                            <div class="cert-issuer" data-i18n="cert_2_issuer">Practical project experience</div>
+                            <div class="cert-date">2024</div>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">🏗️</div>
+                        <div class="cert-info">
+                            <div class="cert-title" data-i18n="cert_3_title">Clean Architecture Pattern</div>
+                            <div class="cert-issuer" data-i18n="cert_3_issuer">Applied in Mulkchi project</div>
+                            <div class="cert-date">2024</div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
-    </div>/t.me/@Elshod_Developer" target="_blank" class="contact-link">✈️ Telegram</a>
+
+        <!-- Footer -->
+        <footer class="footer reveal">
+            <p>© 2024 Elshod Ibodullayev · Built with ❤️</p>
+            <p><a href="https://github.com/ElshodDev" target="_blank">github.com/ElshodDev</a></p>
+        </footer>
+    </div>
 
     <!-- Floating Buttons -->
-    <div class="floating-buttons">
+    <div class="floating-btns">
         <a href="https://t.me/Elshod_Developer" target="_blank" class="float-btn">✈️ Telegram</a>
-        <a href="#contact" class="float-btn" data-i18n="fcta">Hire Me →</a>
+        <a href="#contact" class="float-btn" data-i18n="fcta">💼 Hire Me →</a>
+    </div>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <!-- Mobile Bottom Tabs -->
+    <div class="mobile-tabs">
+        <a href="#hero" class="mobile-tab active">
+            <span class="tab-icon">🏠</span>
+            <span data-i18n="tab_home">Home</span>
+        </a>
+        <a href="#timeline" class="mobile-tab">
+            <span class="tab-icon">🚀</span>
+            <span data-i18n="tab_journey">Journey</span>
+        </a>
+        <a href="#projects" class="mobile-tab">
+            <span class="tab-icon">📂</span>
+            <span data-i18n="tab_projects">Projects</span>
+        </a>
+        <a href="#skills" class="mobile-tab">
+            <span class="tab-icon">🛠️</span>
+            <span data-i18n="tab_skills">Skills</span>
+        </a>
+        <a href="#contact" class="mobile-tab">
+            <span class="tab-icon">📬</span>
+            <span data-i18n="tab_contact">Contact</span>
+        </a>
     </div>
 
     <script>
-        // Translations
+        // ===== TRANSLATIONS =====
         const translations = {
             en: {
+                nav_about: "About", nav_timeline: "Timeline", nav_projects: "Projects",
+                nav_skills: "Skills", nav_contact: "Contact",
                 available: "Open to opportunities",
                 role: "Junior .NET Developer (Backend & Full-Stack)",
                 about_title: "About",
@@ -903,69 +1850,117 @@
                 live_badge: "LIVE NOW",
                 live_demo: "🌐 Live Demo",
                 live_src: "⌥ Source Code",
+                mulkchi_desc: "O'zbekiston uchun ko'chmas mulk platformasi — uy-joy sotish, ijara va agent tizimi. Built with ASP.NET Core 9 + Clean Architecture.",
+                timeline_title: "Journey",
+                tl_mulkchi_date: "2024 — Present", tl_mulkchi_title: "Mulkchi — Real Estate Platform",
+                tl_mulkchi_sub: "Personal Project · Full-Stack",
+                tl_mulkchi_desc: "Building a real estate platform for Uzbekistan with ASP.NET Core 9, Clean Architecture, JWT auth, and Docker deployment.",
+                tl_in_progress: "In Progress",
+                tl_ecom_date: "2024", tl_ecom_title: "E-Commerce REST API",
+                tl_ecom_sub: "Personal Project · Backend",
+                tl_ecom_desc: "Full-featured RESTful API with JWT authentication, role-based authorization, and Swagger documentation. Containerized with Docker.",
+                tl_completed: "Completed", tl_completed2: "Completed",
+                tl_task_date: "2023", tl_task_title: "Task Management System",
+                tl_task_sub: "University · Web App",
+                tl_task_desc: "Multi-user task tracker built on Clean Architecture with EF Core and MS SQL Server.",
+                tl_uni_date: "2022 — 2026", tl_uni_title: "National University of Uzbekistan",
+                tl_uni_sub: "Bachelor of Science — Computer Science",
+                tl_studying: "Studying",
                 projects: "Other Projects",
-                skills: "Skills",
-                learning: "Currently Learning:",
+                proj_ecom_desc: "Full-featured RESTful API with JWT authentication, role-based authorization (Admin/Customer), and complete Swagger documentation. Containerized with Docker.",
+                proj_task_desc: "Multi-user task tracker built on Clean Architecture with EF Core repository abstraction and MS SQL Server.",
+                skills: "Skills", sg_languages: "Languages", learning: "Currently Learning",
                 education: "Education",
                 edu_school: "National University of Uzbekistan",
                 edu_deg: "Bachelor of Science — Computer Science",
                 edu_badge: "In Progress",
                 languages: "Languages",
-                uzbek: "Uzbek",
-                english: "English",
-                russian: "Russian",
-                native: "Native",
+                uzbek: "Uzbek", english: "English", russian: "Russian",
+                certificates: "Certificates & Achievements",
+                cert_1_title: "ASP.NET Core Fundamentals",
+                cert_1_issuer: "Self-study & University coursework",
+                cert_2_title: "Docker & Containerization",
+                cert_2_issuer: "Practical project experience",
+                cert_3_title: "Clean Architecture Pattern",
+                cert_3_issuer: "Applied in Mulkchi project",
                 contact: "Get in Touch",
-                name_label: "Name",
-                email_label: "Email",
-                subject_label: "Subject",
-                message_label: "Message",
+                name_label: "Name", email_label: "Email",
+                subject_label: "Subject", message_label: "Message",
                 name_placeholder: "John Doe",
                 email_placeholder: "john@company.com",
                 subject_placeholder: "Job offer / Collaboration",
                 message_placeholder: "Hi Elshod...",
                 send: "Send Message →",
                 success: "✅ Message sent! I'll get back to you soon.",
-                fcta: "Hire Me →",
-                tg_chat: "Write on Telegram",
-                or: "or"
+                error_msg: "❌ Failed to send. Please try again.",
+                fcta: "💼 Hire Me →",
+                tg_chat: "✈️ Write on Telegram",
+                or: "or",
+                tab_home: "Home", tab_journey: "Journey", tab_projects: "Projects",
+                tab_skills: "Skills", tab_contact: "Contact"
             },
             uz: {
+                nav_about: "Haqimda", nav_timeline: "Yo'lim", nav_projects: "Loyihalar",
+                nav_skills: "Ko'nikmalar", nav_contact: "Bog'lanish",
                 available: "Ish takliflariga ochiqman",
                 role: "Junior .NET Dasturchi · Backend & Full-Stack",
                 about_title: "Haqimda",
-                about: "C#, ASP.NET Core va PostgreSQL yordamida veb-ilovalar yaratish bo'yicha tajribaga ega istiqbolli Junior .NET dasturchisi. Toza arxitektura va REST API dizayniiga ishtiyoqmand. Hozirda Angular, TypeScript va HTML bilan frontendga kengaymoqdaman — to'liq stack muhandisiga aylanishga intilaman.",
+                about: "C#, ASP.NET Core va PostgreSQL yordamida veb-ilovalar yaratish bo'yicha tajribaga ega istiqbolli Junior .NET dasturchisi. Toza arxitektura va REST API dizayniga ishtiyoqmand. Hozirda Angular, TypeScript va HTML bilan frontendga kengaymoqdaman — to'liq stack muhandisiga aylanishga intilaman.",
                 live_badge: "JONLI",
                 live_demo: "🌐 Jonli Ko'rish",
-                live_src: "⌥ Manba Kod",
+                live_src: "⌥ Manba Kodi",
+                mulkchi_desc: "O'zbekiston uchun ko'chmas mulk platformasi — uy-joy sotish, ijara va agent tizimi. ASP.NET Core 9 + Clean Architecture asosida qurilgan.",
+                timeline_title: "Mening Yo'lim",
+                tl_mulkchi_date: "2024 — Hozir", tl_mulkchi_title: "Mulkchi — Ko'chmas Mulk Platformasi",
+                tl_mulkchi_sub: "Shaxsiy Loyiha · Full-Stack",
+                tl_mulkchi_desc: "O'zbekiston uchun ko'chmas mulk platformasini ASP.NET Core 9, Clean Architecture, JWT autentifikatsiya va Docker deployment bilan yaratmoqdaman.",
+                tl_in_progress: "Jarayonda",
+                tl_ecom_date: "2024", tl_ecom_title: "E-Commerce REST API",
+                tl_ecom_sub: "Shaxsiy Loyiha · Backend",
+                tl_ecom_desc: "JWT autentifikatsiya, rolga asoslangan avtorizatsiya va Swagger hujjatlari bilan to'liq REST API. Docker bilan konteynerlashtirilan.",
+                tl_completed: "Yakunlangan", tl_completed2: "Yakunlangan",
+                tl_task_date: "2023", tl_task_title: "Vazifalar Boshqaruv Tizimi",
+                tl_task_sub: "Universitet · Veb Ilova",
+                tl_task_desc: "Clean Architecture asosida EF Core va MS SQL Server bilan ko'p foydalanuvchili vazifa kuzatuvchisi.",
+                tl_uni_date: "2022 — 2026", tl_uni_title: "O'zbekiston Milliy Universiteti",
+                tl_uni_sub: "Bakalavr — Kompyuter fanlari",
+                tl_studying: "O'qimoqda",
                 projects: "Boshqa Loyihalar",
-                skills: "Ko'nikmalar",
-                learning: "O'rganmoqdaman:",
+                proj_ecom_desc: "JWT autentifikatsiya, rolga asoslangan avtorizatsiya (Admin/Mijoz) va to'liq Swagger hujjatlari bilan to'liq funksiyali RESTful API. Docker bilan konteynerlashtirilan.",
+                proj_task_desc: "Clean Architecture asosida EF Core repository abstraktsiya va MS SQL Server bilan ko'p foydalanuvchili vazifa kuzatuvchisi.",
+                skills: "Ko'nikmalar", sg_languages: "Tillar", learning: "O'rganmoqdaman",
                 education: "Ta'lim",
                 edu_school: "O'zbekiston Milliy Universiteti",
                 edu_deg: "Bakalavr — Kompyuter fanlari",
                 edu_badge: "O'qimoqda",
                 languages: "Tillar",
-                uzbek: "O'zbek",
-                english: "Ingliz",
-                russian: "Rus",
-                native: "Ona tili",
+                uzbek: "O'zbek", english: "Ingliz", russian: "Rus",
+                certificates: "Sertifikatlar & Yutuqlar",
+                cert_1_title: "ASP.NET Core Asoslari",
+                cert_1_issuer: "Mustaqil o'rganish & Universitet kurslari",
+                cert_2_title: "Docker & Konteynerlashtirish",
+                cert_2_issuer: "Amaliy loyiha tajribasi",
+                cert_3_title: "Clean Architecture Namunasi",
+                cert_3_issuer: "Mulkchi loyihasida qo'llanilgan",
                 contact: "Bog'lanish",
-                name_label: "Ism",
-                email_label: "Email",
-                subject_label: "Mavzu",
-                message_label: "Xabar",
-                name_placeholder: "John Doe",
-                email_placeholder: "john@company.com",
+                name_label: "Ism", email_label: "Email",
+                subject_label: "Mavzu", message_label: "Xabar",
+                name_placeholder: "Ism Familiya",
+                email_placeholder: "email@kompaniya.com",
                 subject_placeholder: "Ish taklifi / Hamkorlik",
                 message_placeholder: "Salom Elshod...",
                 send: "Xabar Yuborish →",
                 success: "✅ Xabar yuborildi! Tez orada javob beraman.",
-                fcta: "Bog'lanish →",
-                tg_chat: "Telegram da yozing",
-                or: "yoki"
+                error_msg: "❌ Yuborib bo'lmadi. Qayta urinib ko'ring.",
+                fcta: "💼 Bog'lanish →",
+                tg_chat: "✈️ Telegramda yozing",
+                or: "yoki",
+                tab_home: "Bosh", tab_journey: "Yo'l", tab_projects: "Loyihalar",
+                tab_skills: "Ko'nikma", tab_contact: "Aloqa"
             },
             ru: {
+                nav_about: "Обо мне", nav_timeline: "Путь", nav_projects: "Проекты",
+                nav_skills: "Навыки", nav_contact: "Контакт",
                 available: "Открыт для предложений",
                 role: "Junior .NET Разработчик · Backend & Full-Stack",
                 about_title: "Обо мне",
@@ -973,156 +1968,336 @@
                 live_badge: "LIVE",
                 live_demo: "🌐 Открыть сайт",
                 live_src: "⌥ Исходный код",
+                mulkchi_desc: "Платформа недвижимости для Узбекистана — продажа, аренда и агентская система. Построена на ASP.NET Core 9 + Clean Architecture.",
+                timeline_title: "Мой Путь",
+                tl_mulkchi_date: "2024 — Настоящее время", tl_mulkchi_title: "Mulkchi — Платформа Недвижимости",
+                tl_mulkchi_sub: "Личный Проект · Full-Stack",
+                tl_mulkchi_desc: "Создание платформы недвижимости для Узбекистана с ASP.NET Core 9, Clean Architecture, JWT авторизацией и Docker деплоем.",
+                tl_in_progress: "В процессе",
+                tl_ecom_date: "2024", tl_ecom_title: "E-Commerce REST API",
+                tl_ecom_sub: "Личный Проект · Backend",
+                tl_ecom_desc: "Полнофункциональный RESTful API с JWT аутентификацией, ролевой авторизацией и документацией Swagger. Контейнеризирован с Docker.",
+                tl_completed: "Завершён", tl_completed2: "Завершён",
+                tl_task_date: "2023", tl_task_title: "Система Управления Задачами",
+                tl_task_sub: "Университет · Веб-приложение",
+                tl_task_desc: "Многопользовательский трекер задач на Clean Architecture с EF Core и MS SQL Server.",
+                tl_uni_date: "2022 — 2026", tl_uni_title: "Национальный университет Узбекистана",
+                tl_uni_sub: "Бакалавр — Computer Science",
+                tl_studying: "Обучается",
                 projects: "Другие Проекты",
-                skills: "Навыки",
-                learning: "Изучаю сейчас:",
+                proj_ecom_desc: "Полнофункциональный RESTful API с JWT аутентификацией, ролевой авторизацией (Админ/Клиент) и полной документацией Swagger. Контейнеризирован с Docker.",
+                proj_task_desc: "Многопользовательский трекер задач на Clean Architecture с абстракцией репозитория EF Core и MS SQL Server.",
+                skills: "Навыки", sg_languages: "Языки", learning: "Изучаю сейчас",
                 education: "Образование",
                 edu_school: "Национальный университет Узбекистана",
                 edu_deg: "Бакалавр — Computer Science",
                 edu_badge: "Обучается",
                 languages: "Языки",
-                uzbek: "Узбекский",
-                english: "Английский",
-                russian: "Русский",
-                native: "Родной",
+                uzbek: "Узбекский", english: "Английский", russian: "Русский",
+                certificates: "Сертификаты и Достижения",
+                cert_1_title: "Основы ASP.NET Core",
+                cert_1_issuer: "Самообучение и университетские курсы",
+                cert_2_title: "Docker и Контейнеризация",
+                cert_2_issuer: "Практический опыт в проектах",
+                cert_3_title: "Паттерн Clean Architecture",
+                cert_3_issuer: "Применён в проекте Mulkchi",
                 contact: "Написать мне",
-                name_label: "Имя",
-                email_label: "Email",
-                subject_label: "Тема",
-                message_label: "Сообщение",
-                name_placeholder: "John Doe",
-                email_placeholder: "john@company.com",
+                name_label: "Имя", email_label: "Email",
+                subject_label: "Тема", message_label: "Сообщение",
+                name_placeholder: "Иван Иванов",
+                email_placeholder: "ivan@company.com",
                 subject_placeholder: "Предложение о работе / Сотрудничество",
                 message_placeholder: "Привет Эльшод...",
                 send: "Отправить →",
                 success: "✅ Сообщение отправлено! Скоро отвечу.",
-                fcta: "Нанять →",
-                tg_chat: "Написать в Telegram",
-                or: "или"
+                error_msg: "❌ Не удалось отправить. Попробуйте ещё раз.",
+                fcta: "💼 Нанять →",
+                tg_chat: "✈️ Написать в Telegram",
+                or: "или",
+                tab_home: "Главная", tab_journey: "Путь", tab_projects: "Проекты",
+                tab_skills: "Навыки", tab_contact: "Контакт"
             }
         };
 
-        // Language switching
         let currentLang = 'en';
 
+        // ===== LANGUAGE SWITCHING =====
         function updateLanguage(lang) {
             currentLang = lang;
-            const trans = translations[lang];
-            
-            // Update all elements with data-i18n
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (trans[key]) {
-                    element.textContent = trans[key];
-                }
+            const t = translations[lang];
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.textContent = t[key];
             });
 
-            // Update placeholders
-            document.querySelectorAll('[data-ph]').forEach(element => {
-                const key = element.getAttribute('data-ph');
-                if (trans[key]) {
-                    element.placeholder = trans[key];
-                }
+            document.querySelectorAll('[data-ph]').forEach(el => {
+                const key = el.getAttribute('data-ph');
+                if (t[key]) el.placeholder = t[key];
             });
 
-            // Update active language button
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
+
+            localStorage.setItem('portfolio-lang', lang);
         }
 
-        // Language switcher event listeners
         document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                updateLanguage(btn.getAttribute('data-lang'));
-            });
+            btn.addEventListener('click', () => updateLanguage(btn.getAttribute('data-lang')));
         });
 
-        // GitHub API fetch
+        // ===== THEME TOGGLE =====
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        function setTheme(theme) {
+            html.setAttribute('data-theme', theme);
+            themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+            localStorage.setItem('portfolio-theme', theme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+
+        // ===== TYPING ANIMATION =====
+        const typingPhrases = [
+            "Junior .NET Developer",
+            "Backend & Full-Stack",
+            "Clean Architecture Lover",
+            "REST API Designer",
+            "Eager to learn & grow"
+        ];
+
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typingText');
+
+        function typeEffect() {
+            const currentPhrase = typingPhrases[phraseIndex];
+
+            if (isDeleting) {
+                typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let delay = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                delay = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % typingPhrases.length;
+                delay = 400;
+            }
+
+            setTimeout(typeEffect, delay);
+        }
+
+        // ===== ANIMATED COUNTER =====
+        function animateCounter(element, target, duration = 1500) {
+            let start = 0;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(eased * target);
+                element.textContent = current;
+                if (progress < 1) requestAnimationFrame(update);
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // ===== GITHUB API =====
         async function fetchGitHubStats() {
             try {
                 const user = await fetch('https://api.github.com/users/ElshodDev').then(r => r.json());
-                document.getElementById('repos').textContent = user.public_repos;
-                document.getElementById('followers').textContent = user.followers;
-                
+
+                if (user.message) throw new Error(user.message);
+
                 const repos = await fetch('https://api.github.com/users/ElshodDev/repos?per_page=100').then(r => r.json());
+
+                let totalStars = 0, totalForks = 0;
                 if (Array.isArray(repos)) {
-                    const stars = repos.reduce((s, r) => s + r.stargazers_count, 0);
-                    const forks = repos.reduce((s, r) => s + r.forks_count, 0);
-                    document.getElementById('stars').textContent = stars;
-                    document.getElementById('forks').textContent = forks;
+                    totalStars = repos.reduce((s, r) => s + (r.stargazers_count || 0), 0);
+                    totalForks = repos.reduce((s, r) => s + (r.forks_count || 0), 0);
                 }
+
+                // Hero stats
+                animateCounter(document.getElementById('repos'), user.public_repos || 0);
+                animateCounter(document.getElementById('followers'), user.followers || 0);
+                animateCounter(document.getElementById('stars'), totalStars);
+                animateCounter(document.getElementById('forks'), totalForks);
+
+                // Sidebar stats
+                animateCounter(document.getElementById('statsRepos'), user.public_repos || 0);
+                animateCounter(document.getElementById('statsFollowers'), user.followers || 0);
+                animateCounter(document.getElementById('statsStars'), totalStars);
+                animateCounter(document.getElementById('statsForks'), totalForks);
+
             } catch (error) {
-                console.error('GitHub stats error:', error);
+                console.warn('GitHub API:', error.message);
+                // Show dash on error instead of 0
+                ['repos', 'followers', 'stars', 'forks', 'statsRepos', 'statsFollowers', 'statsStars', 'statsForks']
+                    .forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) el.textContent = '–';
+                    });
             }
         }
 
-        // Contact form submission
+        // ===== SCROLL REVEAL =====
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ===== SKILL BAR ANIMATION =====
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        bar.style.width = width + '%';
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('#skills').forEach(el => skillObserver.observe(el));
+
+        // ===== CONTACT FORM =====
         document.getElementById('contactForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            const formData = new FormData(e.target);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                subject: formData.get('subject'),
-                message: formData.get('message')
-            };
 
+            const form = e.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
             const messageDiv = document.getElementById('formMessage');
-            const submitBtn = e.target.querySelector('.form-submit');
-            
+            const submitBtn = form.querySelector('.form-submit-btn');
+
+            // Simple validation
+            let hasError = false;
+            form.querySelectorAll('input[required], textarea[required]').forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('error');
+                    hasError = true;
+                } else {
+                    input.classList.remove('error');
+                }
+            });
+
+            const emailInput = form.querySelector('input[name="email"]');
+            if (emailInput && emailInput.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+                emailInput.classList.add('error');
+                hasError = true;
+            }
+
+            if (hasError) return;
+
             try {
+                submitBtn.classList.add('loading');
                 submitBtn.disabled = true;
-                submitBtn.textContent = 'Sending...';
-                
+
                 const response = await fetch('https://formspree.io/f/xeerkgbl', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body: JSON.stringify(data)
                 });
 
                 if (response.ok) {
                     messageDiv.className = 'form-message success';
                     messageDiv.textContent = translations[currentLang].success;
-                    e.target.reset();
-                    
-                    setTimeout(() => {
-                        messageDiv.textContent = '';
-                    }, 5000);
+                    form.reset();
+                    setTimeout(() => { messageDiv.textContent = ''; messageDiv.className = ''; }, 5000);
                 } else {
-                    throw new Error('Form submission failed');
+                    throw new Error('Failed');
                 }
-            } catch (error) {
-                messageDiv.className = 'form-message error';
-                messageDiv.textContent = '❌ Failed to send message. Please try again.';
+            } catch (err) {
+                messageDiv.className = 'form-message error-msg';
+                messageDiv.textContent = translations[currentLang].error_msg;
             } finally {
+                submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
-                submitBtn.textContent = translations[currentLang].send;
             }
         });
 
-        // Smooth scroll for anchor links
+        // Clear validation errors on input
+        document.querySelectorAll('#contactForm input, #contactForm textarea').forEach(input => {
+            input.addEventListener('input', () => input.classList.remove('error'));
+        });
+
+        // ===== BACK TO TOP =====
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 400);
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ===== SMOOTH SCROLL =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    const offset = 70;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
                 }
             });
         });
 
-        // Initialize
+        // ===== MOBILE TABS ACTIVE STATE =====
+        const mobileTabs = document.querySelectorAll('.mobile-tab');
+        const sections = document.querySelectorAll('section[id], .hero');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const top = section.offsetTop - 100;
+                if (window.scrollY >= top) {
+                    current = section.getAttribute('id') || 'hero';
+                }
+            });
+
+            mobileTabs.forEach(tab => {
+                tab.classList.remove('active');
+                const href = tab.getAttribute('href').replace('#', '');
+                if (href === current) tab.classList.add('active');
+            });
+        });
+
+        // ===== INIT =====
         document.addEventListener('DOMContentLoaded', () => {
+            // Load saved preferences
+            const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+            const savedLang = localStorage.getItem('portfolio-lang') || 'en';
+
+            setTheme(savedTheme);
+            updateLanguage(savedLang);
+
+            // Start effects
             fetchGitHubStats();
-            updateLanguage('en');
+            typeEffect();
         });
     </script>
 </body>
