@@ -1,110 +1,43 @@
-<div align="center">
+# elshod.me
 
-# Hi 👋 I'm Elshod Ibodullayev
+Personal site of **Elshod Ibodullayev** — junior .NET developer in Tashkent.
+Live at **[elshod.me](https://elshod.me)** (served by GitHub Pages from this repository).
 
-### Junior .NET Developer · Backend & Full-Stack
+## What's here
 
-> *"Debugger by day, dreamer by night 🌙"*
+| File | Purpose |
+|---|---|
+| `index.html` | The whole site: hero, work, skills, about, contact |
+| `styles.css` | Design tokens (dark/light), layout, responsive rules, print styles |
+| `script.js` | Language switching (EN / UZ / RU), theme toggle, mobile menu, live GitHub line, contact form |
+| `fonts/` | Self-hosted web fonts (SIL OFL): Instrument Serif, Prata (Cyrillic), Manrope, JetBrains Mono |
+| `og.png`, `favicon.svg` | Social preview image and site icon |
+| `404.html`, `robots.txt`, `sitemap.xml`, `CNAME` | Hosting and SEO plumbing |
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-00E5FF?style=for-the-badge&logo=vercel&logoColor=black)](https://ElshodDev.github.io)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/elshod-ibodullayev-338940379)
-[![Telegram](https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/Elshod_Developer)
-[![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:elshodibadullayev28@gmail.com)
+No build step, no framework, no dependencies: edit a file, commit, and GitHub Pages redeploys.
 
-</div>
+## Editing content
 
----
+* **Text in three languages** lives in the `T` object at the top of `script.js`. Every element with a
+  `data-i18n="key"` attribute in `index.html` is filled from there, so change the English default in
+  the HTML *and* the matching key in `script.js` (`en`, `uz`, `ru`).
+* **Projects** are the `<article class="project">` blocks in `index.html`. Copy one to add another.
+* **Skills** are plain `<li>` tags inside the `.skills` list.
+* **Contact form** posts to Formspree (`ENDPOINT` in `script.js`).
+* **Theme colours** are CSS variables at the top of `styles.css` (`[data-theme="dark"]` / `[data-theme="light"]`).
 
-### 🎯 About Me
+## Local preview
 
-- 🇺🇿 Based in Uzbekistan
-- 🏗️ Building **Mulkchi** — Real Estate Platform for Uzbekistan
-- 📚 Currently learning **Angular & TypeScript**
-- 🤝 Open to work & collaboration opportunities
-- 🎓 CS Student at **National University of Uzbekistan** (2022–2026)
+Fonts are loaded with `@font-face`, which browsers block over `file://`, so serve the folder:
 
----
+```bash
+python3 -m http.server 8000
+# then open http://localhost:8000
+```
 
-### 🛠️ Tech Stack
+## Links
 
-<div align="center">
-
-**Languages**
-<br>
-![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-025E8C?style=for-the-badge&logo=postgresql&logoColor=white)
-
-**Frameworks & Libraries**
-<br>
-![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
-![Entity Framework Core](https://img.shields.io/badge/EF%20Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![REST API](https://img.shields.io/badge/REST%20API-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-
-**Databases**
-<br>
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-![MS SQL Server](https://img.shields.io/badge/MS%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
-
-**Tools & DevOps**
-<br>
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)
-![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
-
-**Currently Learning**
-<br>
-![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-
-</div>
-
----
-
-### 🚀 Featured Project
-
-<div align="center">
-
-**Mulkchi** — Real Estate Platform for Uzbekistan
-<br>
-Built with ASP.NET Core 9 + Clean Architecture + PostgreSQL + Docker
-<br>
-<br>
-[![View Repo](https://img.shields.io/badge/View%20Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ElshodDev/Mulkchi)
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-00E5FF?style=for-the-badge&logo=vercel&logoColor=black)](https://ElshodDev.github.io)
-
-</div>
-
----
-
-### 📊 GitHub Stats
-
-<div align="center">
-
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=ElshodDev&theme=tokyonight&show_icons=true&hide_border=true&bg_color=0D1117&title_color=00E5FF&icon_color=00E5FF&text_color=C9D1D9)
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=ElshodDev&theme=tokyonight&hide_border=true&layout=compact&bg_color=0D1117&title_color=00E5FF&text_color=C9D1D9)
-![GitHub Streak](https://streak-stats.demolab.com/?user=ElshodDev&theme=tokyonight&hide_border=true&background=0D1117&stroke=00E5FF&fire=FF6B6B&currStreakNum=00E5FF&currStreakLabel=00E5FF&ring=00E5FF)
-
-</div>
-
----
-
-### 🐍 Contribution Graph
-
-<div align="center">
-
-![snake](https://raw.githubusercontent.com/ElshodDev/ElshodDev/output/github-contribution-grid-snake-dark.svg)
-
-</div>
-
----
-
-<div align="center">
-
-![Profile views](https://komarev.com/ghpvc/?username=ElshodDev&color=00E5FF)
-
-**Thanks for visiting! ⭐ Star my repos if you find them useful**
-
-</div>
+* GitHub: [@ElshodDev](https://github.com/ElshodDev)
+* LinkedIn: [elshod-ibodullayev](https://www.linkedin.com/in/elshod-ibodullayev-338940379/)
+* Telegram: [@Elshod_Developer](https://t.me/Elshod_Developer)
+* Featured project: [Mulkchi](https://github.com/ElshodDev/Mulkchi) — real-estate platform for Uzbekistan
