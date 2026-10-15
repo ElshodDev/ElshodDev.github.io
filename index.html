@@ -132,13 +132,13 @@
 <pre class="code"><code><span class="kw">var</span> elshod = <span class="kw">new</span> <span class="ty">Developer</span>
 {
     Name<span class="pad">      </span> = <span class="str">"Elshod Ibodullayev"</span>,
-    Role<span class="pad">      </span> = <span class="str">"Junior .NET developer"</span>,
+    Role<span class="pad">      </span> = <span class="str">".NET & Full-Stack developer"</span>,
     Based<span class="pad">     </span> = <span class="str">"Tashkent, Uzbekistan"</span>,
-    Stack<span class="pad">     </span> = [<span class="str">"C#"</span>, <span class="str">"ASP.NET Core"</span>,
+    Stack<span class="pad">     </span> = [<span class="str">"C#"</span>, <span class="str">"ASP.NET Core 9"</span>,
              <span class="pad">     </span><span class="str">"EF Core"</span>, <span class="str">"PostgreSQL"</span>,
-             <span class="pad">     </span><span class="str">"Docker"</span>],
-    Building<span class="pad">  </span> = <span class="str">"Mulkchi"</span>,  <span class="cmt">// real estate</span>
-    Learning<span class="pad">  </span> = [<span class="str">"Angular"</span>, <span class="str">"TypeScript"</span>],
+             <span class="pad">     </span><span class="str">"TypeScript"</span>, <span class="str">"Docker"</span>],
+    Building<span class="pad">  </span> = [<span class="str">"FluentUz"</span>, <span class="str">"Mulkchi"</span>],
+    Learning<span class="pad">  </span> = [<span class="str">"Angular"</span>, <span class="str">"AI Agents"</span>],
     OpenToWork = <span class="kw">true</span><span id="ghLine"></span>
 };</code></pre>
                 </figure>
@@ -150,11 +150,49 @@
             <div class="wrap section-grid">
                 <div class="section-head">
                     <h2 data-i18n="work_title">Work</h2>
-                    <p data-i18n="work_sub">One product I'm building for real users, and the projects that taught me the stack.</p>
+                    <p data-i18n="work_sub">Products I'm building for real users, and projects that taught me the stack.</p>
                 </div>
 
                 <div class="section-body">
-                    <!-- Featured: Mulkchi -->
+                    <!-- Featured 1: FluentUz -->
+                    <article class="featured" style="margin-bottom: 24px;">
+                        <div class="featured-main">
+                            <p class="featured-label" data-i18n="fluentuz_label">Flagship · Live App</p>
+                            <h3 class="featured-title">FluentUz</h3>
+                            <p class="featured-sub" data-i18n="fluentuz_sub">AI-Powered English Learning & Speech Coach (PWA)</p>
+                            <p class="featured-desc" data-i18n="fluentuz_desc">An interactive platform for learning English: real-time speech evaluation, IELTS & CEFR mock tests, writing and pronunciation analysis with instant AI feedback. Engineered as a high-performance Progressive Web App (PWA) with Web Audio API and responsive mobile interfaces.</p>
+                            <ul class="highlights">
+                                <li data-i18n="fluentuz_h1">Real-time speech evaluation and pronunciation feedback using Web Audio API and modern AI models</li>
+                                <li data-i18n="fluentuz_h2">Full IELTS & CEFR mock testing system (Speaking, Writing, Reading, Listening)</li>
+                                <li data-i18n="fluentuz_h3">Progressive Web App (PWA) installable on mobile and desktop with offline support</li>
+                            </ul>
+                            <ul class="tags" aria-label="Technologies">
+                                <li>AI Speech Engine</li><li>TypeScript</li><li>React / Vite</li><li>PWA</li><li>Web Audio API</li><li>CEFR & IELTS</li>
+                            </ul>
+                        </div>
+                        <div class="featured-side">
+                            <dl class="featured-facts">
+                                <div>
+                                    <dt data-i18n="ff_status">Status</dt>
+                                    <dd><span class="status-dot" style="background: var(--accent);" aria-hidden="true"></span><span data-i18n="fluentuz_status">Live in production (2026)</span></dd>
+                                </div>
+                                <div>
+                                    <dt data-i18n="ff_role">My role</dt>
+                                    <dd data-i18n="fluentuz_role">Creator & Full-Stack Developer: architecture, AI integration, speech engine, and UI</dd>
+                                </div>
+                                <div>
+                                    <dt data-i18n="ff_users">Built for</dt>
+                                    <dd data-i18n="fluentuz_users">English learners and IELTS/CEFR candidates in Uzbekistan & beyond</dd>
+                                </div>
+                            </dl>
+                            <div class="featured-actions">
+                                <a href="https://fluentuz.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><span data-i18n="btn_demo_fluentuz">Open fluentuz.app</span><svg class="ext" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+                                <a href="https://github.com/ElshodDev/speaking-coach" target="_blank" rel="noopener noreferrer" class="btn btn-ghost"><span data-i18n="btn_source">Source on GitHub</span><svg class="ext" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Featured 2: Mulkchi -->
                     <article class="featured">
                         <div class="featured-main">
                             <p class="featured-label" data-i18n="featured_label">Featured project</p>
@@ -195,6 +233,14 @@
                     <!-- Other projects -->
                     <h3 class="subhead" data-i18n="projects_title">More projects</h3>
                     <div class="projects">
+                        <article class="project">
+                            <p class="project-meta"><span>2026</span><span data-i18n="type_system">System & Algorithms</span></p>
+                            <h4 class="project-title" data-i18n="elevator_title">Liftni Boshqarish Tizimi</h4>
+                            <p class="project-desc" data-i18n="elevator_desc">Smart multi-elevator dispatching and control system with real-time passenger scheduling algorithms. Built with C# and .NET.</p>
+                            <ul class="tags"><li>C#</li><li>.NET</li><li>Algorithms</li><li>Multithreading</li><li>System Design</li></ul>
+                            <a href="https://github.com/ElshodDev/Liftni-Boshqarish-Tizimi" target="_blank" rel="noopener noreferrer" class="project-link"><span data-i18n="btn_source">Source on GitHub</span><svg class="ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+                        </article>
+
                         <article class="project">
                             <p class="project-meta"><span>2026</span><span data-i18n="type_bot">Telegram bot</span></p>
                             <h4 class="project-title">@raqamli_ofis_bot</h4>
