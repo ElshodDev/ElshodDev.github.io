@@ -11,67 +11,53 @@
             margin: 0;
             padding: 0;
         }
-        body {
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
             background-color: #0b0f19;
-            color: #fff;
             font-family: 'Manrope', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .workspace-title {
-            margin-bottom: 15px;
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            color: #e2e8f0;
-        }
-        .workspace-title span {
-            color: #22c55e;
         }
         .workspace-container {
             position: relative;
-            max-width: 1100px;
-            width: 100%;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            border-radius: 14px;
+            width: 100vw;
+            height: 100vh;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .workspace-img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
             display: block;
         }
         
-        /* Interaktiv qismlar (Hotspots) */
+        /* Interaktiv nuqtalar (Hotspots) */
         .hotspot {
             position: absolute;
             border: 2px dashed rgba(34, 197, 94, 0.7);
             background: rgba(34, 197, 94, 0.2);
-            border-radius: 8px;
+            border-radius: 6px;
             transition: all 0.3s ease;
             cursor: pointer;
+            z-index: 10;
         }
         .hotspot:hover {
             background: rgba(34, 197, 94, 0.45);
             border-color: #22c55e;
-            transform: scale(1.03);
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
         }
-        /* Tooltip (Ustiga borganda chiqadigan yozuv) */
+        /* Tooltip (Ustiga borganda chiqadigan nom) */
         .hotspot::after {
             content: attr(data-tooltip);
             position: absolute;
-            bottom: 108%;
+            bottom: 110%;
             left: 50%;
             transform: translateX(-50%);
             background: #1e293b;
             color: #fff;
             padding: 5px 10px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             border-radius: 6px;
             white-space: nowrap;
@@ -85,48 +71,58 @@
             opacity: 1;
         }
 
-        /* Yuqoridagi monitordagi ikonkalarning joylashuvi (foizda) */
-        .hotspot-mulkchi { top: 8%; left: 41.5%; width: 5.5%; height: 12%; }
-        .hotspot-fluentuz { top: 8%; left: 48.5%; width: 5.5%; height: 12%; }
+        /* Yuqori polka ikonkalari joylashuvi (Foiz nisbatida) */
+        .hotspot-mulkchi   { top: 8%; left: 41.5%; width: 5.5%; height: 12%; }
+        .hotspot-fluentuz  { top: 8%; left: 48.5%; width: 5.5%; height: 12%; }
         .hotspot-portfolio { top: 8%; left: 55.5%; width: 5.5%; height: 12%; }
-        .hotspot-github { top: 8%; left: 62.5%; width: 5.5%; height: 12%; }
+        .hotspot-github    { top: 8%; left: 62.5%; width: 5.5%; height: 12%; }
+        
+        /* YouTube va Telegram joylashuvi (O'ng pastki qismdagi YouTube va boshqalar) */
+        .hotspot-youtube   { top: 62%; left: 81%; width: 7%; height: 10%; }
+        .hotspot-telegram  { top: 78%; left: 81%; width: 6%; height: 9%; }
 
+        /* Orqaga qaytish tugmasi (Chap yuqori burchakda suzib turadi) */
         .back-btn {
-            margin-top: 25px;
-            padding: 10px 24px;
-            background: #22c55e;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 8px 16px;
+            background: rgba(15, 23, 42, 0.8);
             color: #fff;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
+            font-size: 14px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             transition: background 0.2s, transform 0.2s;
+            z-index: 20;
         }
         .back-btn:hover {
-            background: #16a34a;
+            background: #22c55e;
+            color: #0b0f19;
             transform: translateY(-2px);
-        }
-
-        @media (max-width: 768px) {
-            .workspace-title { font-size: 18px; }
         }
     </style>
 </head>
 <body>
 
-    <h2 class="workspace-title">Ibodullayev's <span>Interactive Workspace</span></h2>
-
     <div class="workspace-container">
-        <!-- Rasm fayli -->
+        <a href="../" class="back-btn">← Asosiy sahifa</a>
+
+        <!-- Xona rasmi -->
         <img src="room.jpg" alt="Ibodullayev Workspace" class="workspace-img">
         
-        <!-- Bosiladigan havolalar (Hotspots) -->
-        <a href="https://github.com/ElshodDev" target="_blank" class="hotspot hotspot-mulkchi" data-tooltip="Mulkchi (GitHub)"></a>
-        <a href="https://fluentuz.app/" target="_blank" class="hotspot hotspot-fluentuz" data-tooltip="FluentUZ"></a>
+        <!-- Interaktiv havolalar (Hotspots) -->
+        <a href="https://mulkchi.vercel.app/" target="_blank" class="hotspot hotspot-mulkchi" data-tooltip="Mulkchi (Real Estate)"></a>
+        <a href="https://fluentuz.app/" target="_blank" class="hotspot hotspot-fluentuz" data-tooltip="FluentUZ (Speak English)"></a>
         <a href="https://elshod.me" target="_blank" class="hotspot hotspot-portfolio" data-tooltip="elshod.me Portfolio"></a>
         <a href="https://github.com/ElshodDev" target="_blank" class="hotspot hotspot-github" data-tooltip="GitHub Profile"></a>
+        
+        <!-- YouTube va Telegram havolalari -->
+        <a href="https://youtube.com/@OfficialMakhammadivich" target="_blank" class="hotspot hotspot-youtube" data-tooltip="YouTube Kanalim"></a>
+        <a href="https://t.me/Elshod_Makhammadivich_I" target="_blank" class="hotspot hotspot-telegram" data-tooltip="Telegram Kanalim"></a>
     </div>
-
-    <a href="../" class="back-btn">← Asosiy sahifaga qaytish</a>
 
 </body>
 </html>
