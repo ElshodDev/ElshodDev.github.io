@@ -59,6 +59,7 @@
             sk_prompt: 'Prompt engineering', sk_agents: 'AI agents',
 
             about_title: 'About',
+            room_link: 'Step inside my 3D room: an interactive tour of my projects and goals →',
             about_sub: 'Where I study, what I speak, and how I got here.',
             about_text: "I'm a final-year computer science student in Tashkent who has spent the last two years building web backends in C#. I care about clean architecture, clear API contracts and code the next person can read without asking. Right now I'm growing into a full-stack engineer through Angular and TypeScript, and I'm looking for a junior .NET role or a team I can learn from.",
             edu_title: 'Education',
@@ -141,6 +142,7 @@
             sk_prompt: 'Prompt engineering', sk_agents: 'AI agentlar',
 
             about_title: 'Haqimda',
+            room_link: "3D xonamga kiring: loyihalarim va maqsadlarim bo'ylab interaktiv sayr →",
             about_sub: "Qayerda o'qiyman, qaysi tillarda gaplashaman va bu yerga qanday keldim.",
             about_text: "Toshkentda kompyuter fanlari bo'yicha bitiruvchi kurs talabasiman; so'nggi ikki yilni C# da veb-backend yozishga sarfladim. Toza arxitektura, aniq API shartnomasi va keyingi odam so'ramasdan o'qiy oladigan kod men uchun muhim. Hozir Angular va TypeScript orqali full-stack tomon o'syapman; junior .NET dasturchi sifatida ishlashga yoki o'rganadigan jamoaga qo'shilishga tayyorman.",
             edu_title: "Ta'lim",
@@ -223,6 +225,7 @@
             sk_prompt: 'Промпт-инжиниринг', sk_agents: 'ИИ-агенты',
 
             about_title: 'Обо мне',
+            room_link: 'Загляните в мою 3D-комнату: интерактивный тур по моим проектам и целям →',
             about_sub: 'Где учусь, на каких языках говорю и как сюда пришёл.',
             about_text: 'Учусь на последнем курсе по компьютерным наукам в Ташкенте; последние два года пишу веб-бэкенды на C#. Мне важны чистая архитектура, понятные контракты API и код, который следующий разработчик прочитает без вопросов. Сейчас расту в сторону full-stack через Angular и TypeScript и ищу позицию junior .NET-разработчика или команду, у которой можно учиться.',
             edu_title: 'Образование',
